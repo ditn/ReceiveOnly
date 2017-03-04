@@ -14,25 +14,18 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.ui
 
-import io.reactivex.disposables.CompositeDisposable
+import android.app.Application
+import uk.co.adambennett.receiveonly.injection.Injector
 
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
+class ReceiveOnlyApplication : Application() {
 
-    val compositeDisposable = CompositeDisposable()
+    override fun onCreate() {
+        super.onCreate()
 
-    override lateinit var view: VIEW
+        Injector.instance.init(this)
 
-    override fun init(view: VIEW) {
-        this.view = view
     }
 
-    override fun onViewReady() {
-        // No-op
-    }
-
-    override fun onViewPaused() {
-        // No-op
-    }
 }

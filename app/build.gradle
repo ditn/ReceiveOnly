@@ -34,6 +34,8 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$supportVersion"
     compile "com.android.support:cardview-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
+    // Play Services
+    compile "com.google.android.gms:play-services-vision:$playServicesVersion"
     // Constraint Layout
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     // RxJava
@@ -50,7 +52,7 @@ dependencies {
     compile 'com.squareup.moshi:moshi:1.4.0'
     // Dagger2
     compile "com.google.dagger:dagger:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Integration Test dependencies
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

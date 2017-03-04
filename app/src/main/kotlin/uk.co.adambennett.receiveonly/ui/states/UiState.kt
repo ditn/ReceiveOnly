@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.ui.states
 
-import io.reactivex.disposables.CompositeDisposable
-
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
-
-    val compositeDisposable = CompositeDisposable()
-
-    override lateinit var view: VIEW
-
-    override fun init(view: VIEW) {
-        this.view = view
-    }
-
-    override fun onViewReady() {
-        // No-op
-    }
-
-    override fun onViewPaused() {
-        // No-op
-    }
+enum class UiState {
+    CONTENT,
+    LOADING,
+    EMPTY,
+    FAILED
 }

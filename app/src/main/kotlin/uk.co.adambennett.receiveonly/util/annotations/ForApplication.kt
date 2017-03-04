@@ -14,25 +14,14 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.util.annotations
 
-import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Qualifier
 
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
-
-    val compositeDisposable = CompositeDisposable()
-
-    override lateinit var view: VIEW
-
-    override fun init(view: VIEW) {
-        this.view = view
-    }
-
-    override fun onViewReady() {
-        // No-op
-    }
-
-    override fun onViewPaused() {
-        // No-op
-    }
-}
+/**
+ * This annotation is to denote that the injected {@link Context} is an Application Context, and as
+ * such should be used appropriately.
+ */
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ForApplication

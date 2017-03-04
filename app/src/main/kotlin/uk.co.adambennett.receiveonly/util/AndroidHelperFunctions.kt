@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.util
 
-import io.reactivex.disposables.CompositeDisposable
-
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
-
-    val compositeDisposable = CompositeDisposable()
-
-    override lateinit var view: VIEW
-
-    override fun init(view: VIEW) {
-        this.view = view
-    }
-
-    override fun onViewReady() {
-        // No-op
-    }
-
-    override fun onViewPaused() {
-        // No-op
-    }
+/**
+ * Allows you to call a function and return true separately. Useful in onOptionsItemSelected where
+ * you may want to invoke a function but also have to return a value.
+ */
+inline fun consume(f: () -> Unit): Boolean {
+    f()
+    return true
 }

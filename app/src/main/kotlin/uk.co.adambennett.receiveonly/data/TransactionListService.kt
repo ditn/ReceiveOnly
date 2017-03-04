@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.data
 
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.Observable
+import retrofit2.Retrofit
+import uk.co.adambennett.receiveonly.data.api.MultiAddress
+import uk.co.adambennett.receiveonly.data.models.MultiAddressResponse
 
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
+class TransactionListService constructor(retrofit: Retrofit) {
 
-    val compositeDisposable = CompositeDisposable()
+    private val service: MultiAddress = retrofit.create(MultiAddress::class.java)
 
-    override lateinit var view: VIEW
-
-    override fun init(view: VIEW) {
-        this.view = view
+    /**
+     * Returns an up-to-date {@link MultiAddressResponse} object
+     */
+    fun getMultiAddressObject(xPub: String) : Observable<MultiAddressResponse> {
+        return service.getTransactions(xPub)
     }
 
-    override fun onViewReady() {
-        // No-op
-    }
-
-    override fun onViewPaused() {
-        // No-op
-    }
 }

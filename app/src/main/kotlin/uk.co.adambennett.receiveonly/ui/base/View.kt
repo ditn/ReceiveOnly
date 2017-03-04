@@ -17,5 +17,5 @@
 package uk.co.adambennett.receiveonly.ui.base
 
 interface View {
-
+    // No-op
 }
