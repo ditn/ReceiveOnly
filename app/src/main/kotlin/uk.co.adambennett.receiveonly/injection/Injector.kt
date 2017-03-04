@@ -33,14 +33,18 @@ open class Injector private constructor() {
 
         val applicationModule = ApplicationModule(applicationContext as Application)
         val apiModule = ApiModule()
+        val dataStoreModule = DataStoreModule()
 
-        initAppComponent(applicationModule, apiModule)
+        initAppComponent(applicationModule, apiModule, dataStoreModule)
     }
 
-    protected fun initAppComponent(applicationModule: ApplicationModule, apiModule: ApiModule) {
+    protected fun initAppComponent(applicationModule: ApplicationModule,
+                                   apiModule: ApiModule,
+                                   dataStoreModule: DataStoreModule) {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(applicationModule)
                 .apiModule(apiModule)
+                .dataStoreModule(dataStoreModule)
                 .build()
     }
 

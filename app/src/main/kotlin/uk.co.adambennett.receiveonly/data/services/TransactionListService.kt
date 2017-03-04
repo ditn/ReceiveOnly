@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data
+package uk.co.adambennett.receiveonly.data.services
 
 import io.reactivex.Observable
 import retrofit2.Retrofit

@@ -16,6 +16,8 @@
 
 package uk.co.adambennett.receiveonly.injection
 
+import `in`.co.ophio.secure.core.KeyStoreKeyGenerator
+import `in`.co.ophio.secure.core.ObscuredPreferencesBuilder
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
@@ -23,10 +25,14 @@ import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import uk.co.adambennett.receiveonly.util.annotations.ForApplication
+import javax.inject.Named
 import javax.inject.Singleton
+
 
 @Module
 class ApplicationModule(private val application: Application) {
+
+    private val XPUB_PREFS: String = "uk.co.adambennett.xpub_prefs"
 
     /**
      * Allow the Application context to be injected but require that it be annotated with
@@ -41,8 +47,25 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideSharedPrefs(context: Context): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    @Named("default")
+    fun provideSharedPrefs(): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(application)
+    }
+
+    @Provides
+    @Singleton
+    @Named("secure")
+    fun provideSecurePrefs(): SharedPreferences {
+        val key = KeyStoreKeyGenerator.get(application, application.packageName)
+                .loadOrGenerateKeys()
+
+        return ObscuredPreferencesBuilder()
+                .setApplication(application)
+                .obfuscateValue(true)
+                .obfuscateKey(true)
+                .setSharePrefFileName(XPUB_PREFS)
+                .setSecret(key)
+                .createSharedPrefs()
     }
 
 }

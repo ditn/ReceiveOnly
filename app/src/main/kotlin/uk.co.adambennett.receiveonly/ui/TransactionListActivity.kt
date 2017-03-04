@@ -18,6 +18,7 @@ package uk.co.adambennett.receiveonly.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import okhttp3.OkHttpClient
@@ -28,11 +29,16 @@ import uk.co.adambennett.receiveonly.R
 import uk.co.adambennett.receiveonly.data.api.ApiInterceptor
 import uk.co.adambennett.receiveonly.data.api.BASE_API
 import uk.co.adambennett.receiveonly.data.api.MultiAddress
+import uk.co.adambennett.receiveonly.data.stores.XpubStore
+import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.states.UiState
+import javax.inject.Inject
 
 class TransactionListActivity : AppCompatActivity() {
 
     private val TAG = this::class.java.simpleName
+
+    @Inject lateinit var xpubStore: XpubStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +67,12 @@ class TransactionListActivity : AppCompatActivity() {
 //                        Log.e(TAG, "Well, fuck", e)
 //                    })
 //        }
+
+        Injector.instance.getAppComponent().inject(this)
+
+        xpubStore.storeXpub("I am a value")
+
+        Log.d(TAG, xpubStore.retreiveXpub())
     }
 
     fun setUiState(state: UiState) {

@@ -22,7 +22,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import uk.co.adambennett.receiveonly.data.TransactionListService
+import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import uk.co.adambennett.receiveonly.data.api.ApiInterceptor
 import uk.co.adambennett.receiveonly.data.api.BASE_API
 import javax.inject.Singleton

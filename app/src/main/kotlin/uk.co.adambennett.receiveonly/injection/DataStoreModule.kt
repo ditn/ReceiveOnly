@@ -16,15 +16,20 @@
 
 package uk.co.adambennett.receiveonly.injection
 
-import dagger.Component
-import uk.co.adambennett.receiveonly.ui.TransactionListActivity
+import android.content.SharedPreferences
+import dagger.Module
+import dagger.Provides
+import uk.co.adambennett.receiveonly.data.stores.XpubStore
+import javax.inject.Named
 import javax.inject.Singleton
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, ApiModule::class, DataStoreModule::class))
-interface ApplicationComponent {
+@Module
+class DataStoreModule {
 
-    // TODO: 04/03/2017 Remove me, I'm just here for testing
-    fun inject(transactionListActivity: TransactionListActivity)
+    @Provides
+    @Singleton
+    fun provideXpubStore(@Named("secure") securePrefs: SharedPreferences): XpubStore {
+        return XpubStore(securePrefs)
+    }
 
 }

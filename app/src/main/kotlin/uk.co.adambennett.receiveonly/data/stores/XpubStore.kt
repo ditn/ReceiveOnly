@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.injection
+package uk.co.adambennett.receiveonly.data.stores
 
-import dagger.Component
-import javax.inject.Singleton
+import android.content.SharedPreferences
 
-@Singleton
-@Component(modules = arrayOf(ApiModule::class))
-interface ApiComponent {
+class XpubStore(private val securePrefs: SharedPreferences) {
+
+    private val KEY_X_PUB = "uk.co.adambennett.key_x_pub"
+
+    fun storeXpub(xpub: String) {
+        securePrefs.edit().putString(KEY_X_PUB, xpub).apply()
+    }
+
+    fun retreiveXpub() : String? {
+        return securePrefs.getString(KEY_X_PUB, null)
+    }
 
 }
