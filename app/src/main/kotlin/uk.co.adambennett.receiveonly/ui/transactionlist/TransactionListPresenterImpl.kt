@@ -35,8 +35,10 @@ class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), Trans
     override fun onViewReady() {
         super.onViewReady()
 
+        // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
+
         transactionListService
-                .getMultiAddressObject("REDACTED")
+                .getMultiAddressObject("xpub6D8JtySXyZoeZ7ZTbgP7ZhgjWEHZnNEJYmN9mbaPVgfGTDNzBvJAgNHDx7hN5WCkMkidtG1ZFTa1CJRwqJqu8v6U24rU3D6s3X6PcJnQ6GG")
                 .applySchedulers()
                 .addToCompositeDisposable(this)
                 .doOnSubscribe { view.updateUiState(UiState.LOADING) }
