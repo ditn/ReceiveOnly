@@ -37,7 +37,8 @@ dependencies {
     // Play Services
     compile "com.google.android.gms:play-services-vision:$playServicesVersion"
     // Constraint Layout
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    // TODO: This currently isn't available for installation via command line
+//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // RxJava
     compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
