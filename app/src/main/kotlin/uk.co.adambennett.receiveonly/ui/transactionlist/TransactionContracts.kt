@@ -14,31 +14,23 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.ui.base
+package uk.co.adambennett.receiveonly.ui.transactionlist
 
-import android.support.annotation.CallSuper
-import io.reactivex.disposables.CompositeDisposable
+import uk.co.adambennett.receiveonly.data.models.Tx
+import uk.co.adambennett.receiveonly.ui.base.Presenter
+import uk.co.adambennett.receiveonly.ui.base.View
+import uk.co.adambennett.receiveonly.ui.states.UiState
 
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
+interface TransactionListView : View {
 
-    val compositeDisposable = CompositeDisposable()
+    fun updateUiState(uiState: UiState)
 
-    override lateinit var view: VIEW
+    fun onTransactionsLoaded(transactions: List<Tx>)
 
-    override fun init(view: VIEW) {
-        this.view = view
-    }
+}
 
-    override fun onViewReady() {
-        // No-op
-    }
+interface TransactionListPresenter : Presenter<TransactionListView> {
 
-    override fun onViewPaused() {
-        // No-op
-    }
 
-    @CallSuper
-    override fun onViewDestroyed() {
-        compositeDisposable.clear()
-    }
+
 }

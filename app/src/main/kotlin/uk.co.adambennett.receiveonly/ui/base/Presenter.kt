@@ -26,4 +26,6 @@ interface Presenter<VIEW : View> {
 
     fun onViewPaused()
 
+    fun onViewDestroyed()
+
 }

@@ -26,7 +26,7 @@ class XpubStore(private val securePrefs: SharedPreferences) {
         securePrefs.edit().putString(KEY_X_PUB, xpub).apply()
     }
 
-    fun retreiveXpub() : String? {
+    fun retrieveXpub() : String? {
         return securePrefs.getString(KEY_X_PUB, null)
     }
 

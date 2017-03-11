@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.TransactionListActivity">
+        <activity android:name=".ui.transactionlist.TransactionListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -55,6 +55,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // Secure Shared Preferences
     compile "in.co.ophio:secure-preferences:0.1.3"
+    // BitcoinJ
+    compile 'org.bitcoinj:bitcoinj-core:0.14.4'
 
     // Integration Test dependencies
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

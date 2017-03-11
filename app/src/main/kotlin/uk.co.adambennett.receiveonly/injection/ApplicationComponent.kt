@@ -17,14 +17,13 @@
 package uk.co.adambennett.receiveonly.injection
 
 import dagger.Component
-import uk.co.adambennett.receiveonly.ui.TransactionListActivity
+import uk.co.adambennett.receiveonly.ui.transactionlist.TransactionListPresenterImpl
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = arrayOf(ApplicationModule::class, ApiModule::class, DataStoreModule::class))
 interface ApplicationComponent {
 
-    // TODO: 04/03/2017 Remove me, I'm just here for testing
-    fun inject(transactionListActivity: TransactionListActivity)
+    fun inject(transactionListPresenterImpl: TransactionListPresenterImpl)
 
 }
