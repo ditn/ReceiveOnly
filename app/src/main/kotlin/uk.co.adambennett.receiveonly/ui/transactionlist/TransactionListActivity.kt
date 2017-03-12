@@ -92,22 +92,10 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         }
     }
 
-    override val layoutId: Int
-        get() = R.layout.activity_transaction_list
+    override val layoutId: Int = R.layout.activity_transaction_list
 
     override fun createPresenter(): TransactionListPresenter = TransactionListPresenterImpl()
 
-    override val view: TransactionListView
-        get() = this
-
-    override fun onPause() {
-        super.onPause()
-        presenter.onViewPaused()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onViewDestroyed()
-    }
+    override val view: TransactionListView = this
 
 }

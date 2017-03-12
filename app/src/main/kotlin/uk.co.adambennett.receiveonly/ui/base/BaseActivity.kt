@@ -18,6 +18,7 @@ package uk.co.adambennett.receiveonly.ui.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 
@@ -35,6 +36,18 @@ abstract class BaseActivity<VIEW : View, PRESENTER : Presenter<VIEW>> : AppCompa
 
     protected fun onViewReady() {
         presenter.onViewReady()
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        presenter.onViewDestroyed()
+        super.onDestroy()
+    }
+
+    @CallSuper
+    override fun onPause() {
+        presenter.onViewPaused()
+        super.onPause()
     }
 
     @get:LayoutRes

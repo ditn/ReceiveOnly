@@ -27,7 +27,8 @@ import uk.co.adambennett.receiveonly.data.models.Tx
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionListAdapter(var items: List<Tx>, val listener: (Tx) -> Unit) : RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
+class TransactionListAdapter(var items: List<Tx>, val listener: (Tx) -> Unit) :
+        RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onBindViewHolder(holder: TransactionViewHolder?, position: Int) {
         holder?.bindTransaction(items[position])
