@@ -27,19 +27,10 @@ import uk.co.adambennett.receiveonly.data.models.Tx
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionListAdapter(val items: List<Tx>) : RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
+class TransactionListAdapter(var items: List<Tx>, val listener: (Tx) -> Unit) : RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onBindViewHolder(holder: TransactionViewHolder?, position: Int) {
-        val tx = items[position]
-
-        val date = Date(tx.time * 1000)
-        val formatter = SimpleDateFormat.getDateTimeInstance()
-        val dateFormatted = formatter.format(date)
-        holder?.date?.text = dateFormatted
-
-        val format: String = BtcFormat.getCoinInstance(10).format(tx.result)
-
-        holder?.amount?.text = format
+        holder?.bindTransaction(items[position])
     }
 
     override fun getItemCount(): Int {
@@ -48,14 +39,37 @@ class TransactionListAdapter(val items: List<Tx>) : RecyclerView.Adapter<Transac
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransactionViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_transaction, parent, false)
-        return TransactionViewHolder(view)
+        return TransactionViewHolder(view, listener)
     }
 
-    inner class TransactionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    fun updateTransactions(items: List<Tx>) {
+        this.items = items
+        // TODO: 12/03/2017 Use diffUtil
+        notifyDataSetChanged()
+    }
+
+    inner class TransactionViewHolder(itemView: View?, val listener: (Tx) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         val direction: TextView = itemView?.findViewById(R.id.direction) as TextView
         val date: TextView = itemView?.findViewById(R.id.date) as TextView
         val amount: TextView = itemView?.findViewById(R.id.amount) as TextView
+
+        fun bindTransaction(transaction: Tx) {
+            itemView.setOnClickListener { listener(transaction) }
+
+            val txDate = Date(transaction.time * 1000)
+            val formatter = SimpleDateFormat.getDateTimeInstance()
+            val dateFormatted = formatter.format(txDate)
+            date.text = dateFormatted
+
+            val amountFormatted = BtcFormat.getCodeInstance().format(transaction.result)
+            amount.text = amountFormatted
+
+            when {
+                transaction.result < 0 -> direction.text = "Sent"
+                else -> direction.text = "Received"
+            }
+        }
 
     }
 }

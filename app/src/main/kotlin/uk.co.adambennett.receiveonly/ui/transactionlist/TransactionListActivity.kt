@@ -18,20 +18,46 @@ package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import uk.co.adambennett.receiveonly.R
 import uk.co.adambennett.receiveonly.data.models.Tx
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
 import uk.co.adambennett.receiveonly.ui.states.UiState
+import uk.co.adambennett.receiveonly.util.consume
+import java.util.*
 
 class TransactionListActivity : BaseActivity<TransactionListView, TransactionListPresenter>(), TransactionListView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // TODO: 12/03/2017 In the future, show formatted empty balance
+        toolbar.title = ""
         setSupportActionBar(toolbar)
 
+        recyclerview.adapter = TransactionListAdapter(Collections.emptyList()) {
+            Log.d("TAG", "Clicked: " + it)
+        }
+
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        swipe_refresh.setOnRefreshListener { presenter.onTransactionsRequested() }
+
         onViewReady()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_transaction_list, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.settings -> consume { launchSettingsActivity() }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun updateUiState(uiState: UiState) {
@@ -39,13 +65,21 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
     }
 
     override fun onTransactionsLoaded(transactions: List<Tx>) {
-        recyclerview.adapter = TransactionListAdapter(transactions)
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        (recyclerview.adapter as TransactionListAdapter).updateTransactions(transactions)
+    }
+
+    override fun onBalanceLoaded(balance: String) {
+        collapsing_layout.title = balance
+    }
+
+    fun launchSettingsActivity() {
+        TODO() // This should start a preferences page with night mode, format settings etc
     }
 
     fun setUiState(state: UiState) {
         when (state) {
             UiState.CONTENT -> {
+                swipe_refresh.isRefreshing = false
                 recyclerview.visibility = View.VISIBLE
                 loading_layout.visibility = View.INVISIBLE
             }
@@ -75,4 +109,5 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         super.onDestroy()
         presenter.onViewDestroyed()
     }
+
 }

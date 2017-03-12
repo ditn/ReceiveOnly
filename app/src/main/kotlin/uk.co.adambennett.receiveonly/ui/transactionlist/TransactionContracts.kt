@@ -27,10 +27,12 @@ interface TransactionListView : View {
 
     fun onTransactionsLoaded(transactions: List<Tx>)
 
+    fun onBalanceLoaded(balance: String)
+
 }
 
 interface TransactionListPresenter : Presenter<TransactionListView> {
 
-
+    fun onTransactionsRequested()
 
 }

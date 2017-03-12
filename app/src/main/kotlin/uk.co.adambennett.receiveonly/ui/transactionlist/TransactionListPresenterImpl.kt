@@ -16,6 +16,7 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
+import org.bitcoinj.utils.BtcFixedFormat
 import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
@@ -32,13 +33,15 @@ class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), Trans
         Injector.instance.getAppComponent().inject(this)
     }
 
+    // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
     override fun onViewReady() {
         super.onViewReady()
+        onTransactionsRequested()
+    }
 
-        // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
-
+    override fun onTransactionsRequested() {
         transactionListService
-                .getMultiAddressObject("xpub6D8JtySXyZoeZ7ZTbgP7ZhgjWEHZnNEJYmN9mbaPVgfGTDNzBvJAgNHDx7hN5WCkMkidtG1ZFTa1CJRwqJqu8v6U24rU3D6s3X6PcJnQ6GG")
+                .getMultiAddressObject("REDACTED")
                 .applySchedulers()
                 .addToCompositeDisposable(this)
                 .doOnSubscribe { view.updateUiState(UiState.LOADING) }
@@ -49,6 +52,11 @@ class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), Trans
                         view.onTransactionsLoaded(response.txs)
                         view.updateUiState(UiState.CONTENT)
                     }
+                    val formattedTotal =
+                            BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
+
+                    view.onBalanceLoaded(formattedTotal)
+
                 }, { _ ->
                     view.updateUiState(UiState.FAILED)
                 })
