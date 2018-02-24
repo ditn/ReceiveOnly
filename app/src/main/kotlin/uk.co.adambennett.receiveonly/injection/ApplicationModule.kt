@@ -28,11 +28,8 @@ import uk.co.adambennett.receiveonly.util.annotations.ForApplication
 import javax.inject.Named
 import javax.inject.Singleton
 
-
 @Module
 class ApplicationModule(private val application: Application) {
-
-    private val XPUB_PREFS: String = "uk.co.adambennett.xpub_prefs"
 
     /**
      * Allow the Application context to be injected but require that it be annotated with
@@ -57,15 +54,21 @@ class ApplicationModule(private val application: Application) {
     @Named("secure")
     fun provideSecurePrefs(): SharedPreferences {
         val key = KeyStoreKeyGenerator.get(application, application.packageName)
-                .loadOrGenerateKeys()
+            .loadOrGenerateKeys()
 
         return ObscuredPreferencesBuilder()
-                .setApplication(application)
-                .obfuscateValue(true)
-                .obfuscateKey(true)
-                .setSharePrefFileName(XPUB_PREFS)
-                .setSecret(key)
-                .createSharedPrefs()
+            .setApplication(application)
+            .obfuscateValue(true)
+            .obfuscateKey(true)
+            .setSharePrefFileName(Companion.XPUB_PREFS)
+            .setSecret(key)
+            .createSharedPrefs()
+    }
+
+    companion object {
+
+        private const val XPUB_PREFS: String = "uk.co.adambennett.xpub_prefs"
+
     }
 
 }

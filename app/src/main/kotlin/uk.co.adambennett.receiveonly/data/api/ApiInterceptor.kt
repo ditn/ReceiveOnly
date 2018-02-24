@@ -35,10 +35,11 @@ class ApiInterceptor : Interceptor {
         val startTime = System.nanoTime()
 
         var requestLog = String.format(
-                "Sending request %s with headers %s%n%s",
-                request.url(),
-                chain.connection(),
-                request.headers())
+            "Sending request %s with headers %s%n%s",
+            request.url(),
+            chain.connection(),
+            request.headers()
+        )
 
         if (request.method().compareTo("post", ignoreCase = true) == 0) {
             requestLog = "\n" + requestLog + "\n" + requestBodyToString(request.body())
@@ -50,11 +51,12 @@ class ApiInterceptor : Interceptor {
         val endTime = System.nanoTime()
 
         val responseLog = String.format(
-                Locale.ENGLISH,
-                "Received response from %s in %.1fms%n%s",
-                response.request().url(),
-                (endTime - startTime) / 1e6,
-                response.headers())
+            Locale.ENGLISH,
+            "Received response from %s in %.1fms%n%s",
+            response.request().url(),
+            (endTime - startTime) / 1e6,
+            response.headers()
+        )
 
         val bodyString = response.body().string()
         if (response.code() == 200) {
@@ -64,8 +66,8 @@ class ApiInterceptor : Interceptor {
         }
 
         return response.newBuilder()
-                .body(ResponseBody.create(response.body().contentType(), bodyString))
-                .build()
+            .body(ResponseBody.create(response.body().contentType(), bodyString))
+            .build()
     }
 
     private fun requestBodyToString(request: RequestBody?): String {

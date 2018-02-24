@@ -21,7 +21,9 @@ import android.content.Context
 
 open class Injector private constructor() {
 
-    private object Holder { val INSTANCE = Injector() }
+    private object Holder {
+        val INSTANCE = Injector()
+    }
 
     companion object {
         val instance: Injector by lazy { Holder.INSTANCE }
@@ -38,14 +40,16 @@ open class Injector private constructor() {
         initAppComponent(applicationModule, apiModule, dataStoreModule)
     }
 
-    protected fun initAppComponent(applicationModule: ApplicationModule,
-                                   apiModule: ApiModule,
-                                   dataStoreModule: DataStoreModule) {
+    protected fun initAppComponent(
+        applicationModule: ApplicationModule,
+        apiModule: ApiModule,
+        dataStoreModule: DataStoreModule
+    ) {
         applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(applicationModule)
-                .apiModule(apiModule)
-                .dataStoreModule(dataStoreModule)
-                .build()
+            .applicationModule(applicationModule)
+            .apiModule(apiModule)
+            .dataStoreModule(dataStoreModule)
+            .build()
     }
 
     fun getAppComponent(): ApplicationComponent {

@@ -16,6 +16,7 @@
 
 package uk.co.adambennett.receiveonly.ui.states
 
+// TODO: Replace me with sealed class
 enum class UiState {
     CONTENT,
     LOADING,

@@ -28,7 +28,7 @@ class TransactionListService constructor(retrofit: Retrofit) {
     /**
      * Returns an up-to-date {@link MultiAddressResponse} object
      */
-    fun getMultiAddressObject(xPub: String) : Observable<MultiAddressResponse> {
+    fun getMultiAddressObject(xPub: String): Observable<MultiAddressResponse> {
         return service.getTransactions(xPub)
     }
 

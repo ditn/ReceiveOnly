@@ -27,19 +27,18 @@ import uk.co.adambennett.receiveonly.data.models.Tx
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionListAdapter(var items: List<Tx>, val listener: (Tx) -> Unit) :
-        RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
+class TransactionListAdapter(private var items: List<Tx>, private val listener: (Tx) -> Unit) :
+    RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onBindViewHolder(holder: TransactionViewHolder?, position: Int) {
         holder?.bindTransaction(items[position])
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransactionViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_transaction, parent, false)
+        val view =
+            LayoutInflater.from(parent?.context).inflate(R.layout.item_transaction, parent, false)
         return TransactionViewHolder(view, listener)
     }
 
@@ -49,7 +48,8 @@ class TransactionListAdapter(var items: List<Tx>, val listener: (Tx) -> Unit) :
         notifyDataSetChanged()
     }
 
-    inner class TransactionViewHolder(itemView: View?, val listener: (Tx) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class TransactionViewHolder(itemView: View?, private val listener: (Tx) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
 
         val direction: TextView = itemView?.findViewById(R.id.direction) as TextView
         val date: TextView = itemView?.findViewById(R.id.date) as TextView

@@ -4,21 +4,21 @@ buildscript {
 
     // Dependency versions
     ext {
-        kotlinVersion = '1.1.0'
-        playServicesVersion = '10.2.0'
-        supportVersion = '25.2.0'
-        rxJavaVersion = '2.0.6'
+        kotlinVersion = '1.2.21'
+        playServicesVersion = '10.2.1'
+        supportVersion = '27.0.2'
         rxAndroidVersion = '2.0.1'
-        daggerVersion = '2.10-rc2'
+        daggerVersion = '2.11'
         retrofitVersion = '2.2.0'
-        okHttpVersion = '3.6.0'
+        okHttpVersion = '3.7.0'
     }
 
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong

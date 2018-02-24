@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data.stores
+package uk.co.adambennett.receiveonly.util.annotations
 
-import android.content.SharedPreferences
+import javax.inject.Qualifier
 
-class XpubStore(private val securePrefs: SharedPreferences) {
-
-    private val KEY_X_PUB = "uk.co.adambennett.key_x_pub"
-
-    fun storeXpub(xpub: String) {
-        securePrefs.edit().putString(KEY_X_PUB, xpub).apply()
-    }
-
-    fun retrieveXpub(): String? {
-        return securePrefs.getString(KEY_X_PUB, null)
-    }
-
-}
+/**
+ * Used to explicitly indicate that a class is unscoped in Dagger2, and therefore could
+ * be garbage collected at any time if all references to it are out of scope according
+ * to the runtime GC.
+ */
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Unscoped

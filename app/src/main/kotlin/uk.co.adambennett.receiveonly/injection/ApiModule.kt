@@ -22,9 +22,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import uk.co.adambennett.receiveonly.data.api.ApiInterceptor
 import uk.co.adambennett.receiveonly.data.api.BASE_API
+import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import javax.inject.Singleton
 
 @Module
@@ -34,19 +34,19 @@ class ApiModule {
     @Singleton
     fun provideOkHttp(): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(ApiInterceptor())
-                .build()
+            .addInterceptor(ApiInterceptor())
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BASE_API)
-                .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
+            .baseUrl(BASE_API)
+            .client(client)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
     }
 
     @Provides

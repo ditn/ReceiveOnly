@@ -18,20 +18,18 @@ package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import org.bitcoinj.utils.BtcFixedFormat
 import uk.co.adambennett.receiveonly.data.services.TransactionListService
-import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 import uk.co.adambennett.receiveonly.ui.states.UiState
+import uk.co.adambennett.receiveonly.util.annotations.Unscoped
 import uk.co.adambennett.receiveonly.util.rxjava.addToCompositeDisposable
 import uk.co.adambennett.receiveonly.util.rxjava.applySchedulers
 import javax.inject.Inject
 
-class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), TransactionListPresenter {
-
-    @Inject lateinit var transactionListService: TransactionListService
-
-    init {
-        Injector.instance.getAppComponent().inject(this)
-    }
+@Unscoped
+class TransactionListPresenterImpl @Inject constructor(
+    private val transactionListService: TransactionListService
+): BasePresenter<TransactionListView>(),
+    TransactionListPresenter {
 
     // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
     override fun onViewReady() {
@@ -41,11 +39,13 @@ class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), Trans
 
     override fun onTransactionsRequested() {
         transactionListService
-                .getMultiAddressObject("REDACTED")
-                .applySchedulers()
-                .addToCompositeDisposable(this)
-                .doOnSubscribe { view.updateUiState(UiState.LOADING) }
-                .subscribe({ response ->
+            // Random xPub lifted from a Google search; has a few small transactions
+            .getMultiAddressObject("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .applySchedulers()
+            .addToCompositeDisposable(this)
+            .doOnSubscribe { view.updateUiState(UiState.LOADING) }
+            .subscribe(
+                { response ->
                     if (response.txs.isEmpty()) {
                         view.updateUiState(UiState.EMPTY)
                     } else {
@@ -53,13 +53,14 @@ class TransactionListPresenterImpl : BasePresenter<TransactionListView>(), Trans
                         view.updateUiState(UiState.CONTENT)
                     }
                     val formattedTotal =
-                            BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
+                        BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
 
                     view.onBalanceLoaded(formattedTotal)
 
                 }, { _ ->
                     view.updateUiState(UiState.FAILED)
-                })
+                }
+            )
     }
 
 }

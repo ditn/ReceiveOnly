@@ -25,12 +25,21 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import uk.co.adambennett.receiveonly.R
 import uk.co.adambennett.receiveonly.data.models.Tx
+import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
 import uk.co.adambennett.receiveonly.ui.states.UiState
 import uk.co.adambennett.receiveonly.util.consume
 import java.util.*
+import javax.inject.Inject
 
-class TransactionListActivity : BaseActivity<TransactionListView, TransactionListPresenter>(), TransactionListView {
+class TransactionListActivity : BaseActivity<TransactionListView, TransactionListPresenter>(),
+    TransactionListView {
+
+    @Inject lateinit var transactionListPresenter: TransactionListPresenterImpl
+
+    init {
+        Injector.instance.getAppComponent().inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +63,7 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.settings -> consume { launchSettingsActivity() }
         }
         return super.onOptionsItemSelected(item)
@@ -94,7 +103,7 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
 
     override val layoutId: Int = R.layout.activity_transaction_list
 
-    override fun createPresenter(): TransactionListPresenter = TransactionListPresenterImpl()
+    override fun createPresenter() = transactionListPresenter
 
     override val view: TransactionListView = this
 
