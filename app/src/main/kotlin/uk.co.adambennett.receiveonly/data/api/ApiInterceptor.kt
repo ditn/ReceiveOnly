@@ -27,8 +27,6 @@ import java.util.*
 
 class ApiInterceptor : Interceptor {
 
-    private val TAG = ApiInterceptor::class.java.simpleName
-
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -45,7 +43,7 @@ class ApiInterceptor : Interceptor {
             requestLog = "\n" + requestLog + "\n" + requestBodyToString(request.body())
         }
 
-        Log.d(TAG, "Request:" + "\n" + requestLog)
+        Log.d(Companion.TAG, "Request:" + "\n" + requestLog)
 
         val response = chain.proceed(request)
         val endTime = System.nanoTime()
@@ -58,15 +56,15 @@ class ApiInterceptor : Interceptor {
             response.headers()
         )
 
-        val bodyString = response.body().string()
+        val bodyString = response.body()!!.string()
         if (response.code() == 200) {
-            Log.d(TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
+            Log.d(Companion.TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
         } else {
-            Log.e(TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
+            Log.e(Companion.TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
         }
 
         return response.newBuilder()
-            .body(ResponseBody.create(response.body().contentType(), bodyString))
+            .body(ResponseBody.create(response.body()!!.contentType(), bodyString))
             .build()
     }
 
@@ -84,6 +82,12 @@ class ApiInterceptor : Interceptor {
         } finally {
             buffer.close()
         }
+    }
+
+    companion object {
+
+        private val TAG = ApiInterceptor::class.java.simpleName
+
     }
 
 }
