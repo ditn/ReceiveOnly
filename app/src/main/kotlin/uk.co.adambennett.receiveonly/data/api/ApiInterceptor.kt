@@ -43,7 +43,7 @@ class ApiInterceptor : Interceptor {
             requestLog = "\n" + requestLog + "\n" + requestBodyToString(request.body())
         }
 
-        Log.d(Companion.TAG, "Request:" + "\n" + requestLog)
+        Log.d(Companion.TAG, "Request:\n$requestLog")
 
         val response = chain.proceed(request)
         val endTime = System.nanoTime()
@@ -58,9 +58,9 @@ class ApiInterceptor : Interceptor {
 
         val bodyString = response.body()!!.string()
         if (response.code() == 200) {
-            Log.d(Companion.TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
+            Log.d(Companion.TAG, "Response:\n$responseLog\n$bodyString")
         } else {
-            Log.e(Companion.TAG, "Response:" + "\n" + responseLog + "\n" + bodyString)
+            Log.e(Companion.TAG, "Response:\n$responseLog\n$bodyString")
         }
 
         return response.newBuilder()

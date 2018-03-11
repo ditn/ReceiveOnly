@@ -34,8 +34,7 @@ kapt {
 }
 
 dependencies {
-    // Kotlin
-    implementation Dependencies.kotlin
+    compile project(':core')
     // Support Libraries
     implementation Dependencies.appcompatV7
     implementation Dependencies.recyclerviewV7
@@ -46,24 +45,11 @@ dependencies {
     // Constraint Layout
     implementation Dependencies.constraintLayout
     // RxJava
-    implementation Dependencies.rxKotlin
     implementation Dependencies.rxAndroid
-    // Retrofit
-    implementation Dependencies.retrofit
-    implementation Dependencies.retrofitRxAdapter
-    implementation Dependencies.retrofitMoshiConverter
-    // OkHttp
-    implementation Dependencies.okHttp
-    implementation Dependencies.okHttpLogging
-    // Moshi
-    implementation Dependencies.moshi
     // Dagger2
-    implementation Dependencies.dagger
     kapt Dependencies.daggerCompiler
     // Secure Shared Preferences
     implementation Dependencies.securePrefs
-    // BitcoinJ
-    implementation Dependencies.bitcoinJ
     // QR Scanning
     implementation Dependencies.qrReader
 

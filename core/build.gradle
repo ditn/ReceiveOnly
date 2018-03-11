@@ -1,0 +1,56 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    // Kotlin
+    api Dependencies.kotlin
+    // RxJava
+    api Dependencies.rxKotlin
+    // Retrofit
+    api Dependencies.retrofit
+    api Dependencies.retrofitRxAdapter
+    api Dependencies.retrofitMoshiConverter
+    // OkHttp
+    api Dependencies.okHttp
+    api Dependencies.okHttpLogging
+    // Moshi
+    api Dependencies.moshi
+    // BitcoinJ
+    api Dependencies.bitcoinJ
+    // Dagger2
+    api Dependencies.dagger
+
+    // Unit Test dependencies
+    testImplementation Dependencies.jUnit
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath Dependencies.kotlinGradlePlugin
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.6"
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.6"
+    }
+    sourceSets {
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}

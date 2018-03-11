@@ -20,22 +20,22 @@ object Versions {
 
     // Release info
     const val minSdk = 21
-    const val targetSdk = 26
-    const val compileSdk = 26
+    const val targetSdk = 27
+    const val compileSdk = 27
     const val versionCode = 1
     const val versionName = "1.0"
     const val buildTools = "27.0.3"
 
     // Build tools and languages
     const val androidGradlePlugin = "3.0.1"
-    const val kotlin = "1.2.21"
+    const val kotlin = "1.2.30"
 
     // Google
     const val supportVersion = "27.0.2"
     const val constraintLayout = "1.0.2"
     const val playServices = "11.8.0"
     // Arch
-    const val dagger = "2.11"
+    const val dagger = "2.15"
     const val rxKotlin = "2.2.0"
     const val rxAndroid = "2.0.2"
     // Networking
