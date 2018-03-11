@@ -19,7 +19,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
-          command: ./gradlew assembleDebug testDebugUnitTest --no-daemon -Dpre-dex=false -Porg.gradle.parallel=false -Pcom.android.build.threadPoolSize=1 --stacktrace
+          command: ./gradlew assembleDebug testDebugUnitTest --no-daemon -Dpre-dex=false -Porg.gradle.parallel=false -Pcom.android.threadPoolSize=1 --stacktrace
       - store_artifacts:
           path: app/build/reports
           destination: reports
