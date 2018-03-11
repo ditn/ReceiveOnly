@@ -31,9 +31,10 @@ object Versions {
     const val kotlin = "1.2.30"
 
     // Google
-    const val supportVersion = "27.0.2"
+    const val supportVersion = "27.1.0"
     const val constraintLayout = "1.0.2"
     const val room = "1.0.0"
+    const val roomPaging = "1.0.0-alpha6"
     const val playServices = "11.8.0"
     // Arch
     const val dagger = "2.15"
@@ -76,7 +77,7 @@ object Dependencies {
     // Room Rx Bindings
     const val roomRxJava = "android.arch.persistence.room:rxjava2:${Versions.room}"
     // Paging
-    const val roomPaging = "android.arch.paging:runtime:1.0.0-a${Versions.room}"
+    const val roomPaging = "android.arch.paging:runtime:${Versions.roomPaging}"
     // Test helpers for Room
     const val roomTesting = "android.arch.persistence.room:testing:${Versions.room}"
     // Play Services

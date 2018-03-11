@@ -22,23 +22,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import org.bitcoinj.utils.BtcFormat
-import uk.co.adambennett.receiveonly.R
 import uk.co.adambennett.core.data.models.Tx
+import uk.co.adambennett.receiveonly.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionListAdapter(private var items: List<Tx>, private val listener: (Tx) -> Unit) :
     RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
-    override fun onBindViewHolder(holder: TransactionViewHolder?, position: Int) {
-        holder?.bindTransaction(items[position])
+    override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
+        holder.bindTransaction(items[position])
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransactionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val view =
-            LayoutInflater.from(parent?.context).inflate(R.layout.item_transaction, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_transaction, parent, false)
         return TransactionViewHolder(view, listener)
     }
 

@@ -1,13 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Versions.compileSdk
     buildToolsVersion Versions.buildTools
+
     defaultConfig {
-        applicationId "uk.uk.co.adambennett.receiveonly"
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
         versionCode Versions.versionCode
@@ -24,7 +23,6 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 }
 
@@ -36,29 +34,20 @@ kapt {
 
 dependencies {
     implementation project(':core')
-    implementation project(':androidcore')
-    // Support Libraries
-    implementation Dependencies.appcompatV7
-    implementation Dependencies.recyclerviewV7
-    implementation Dependencies.cardview
-    implementation Dependencies.design
-    // Play Services
-    implementation Dependencies.playServices
-    // Constraint Layout
-    implementation Dependencies.constraintLayout
+    // Persistence
+    api Dependencies.roomRuntime
+    api Dependencies.roomRxJava
+    api Dependencies.roomPaging
+    kapt Dependencies.roomCompiler
     // Dagger2
     kapt Dependencies.daggerCompiler
-    // Secure Shared Preferences
-    implementation Dependencies.securePrefs
-    // QR Scanning
-    implementation Dependencies.qrReader
-
-    // Integration Test dependencies
-    androidTestImplementation(Dependencies.espressoCore, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    // RxJava
+    api Dependencies.rxAndroid
+    // Logging
+    api Dependencies.timber
 
     // Unit Test dependencies
+    testImplementation Dependencies.roomTesting
     testImplementation Dependencies.jUnit
 }
 
