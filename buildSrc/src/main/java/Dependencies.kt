@@ -36,6 +36,7 @@ object Versions {
     const val playServices = "11.8.0"
     // Arch
     const val dagger = "2.15"
+    const val annotations = "3.1.1"
     const val rxKotlin = "2.2.0"
     const val rxAndroid = "2.0.2"
     // Networking
@@ -80,6 +81,7 @@ object Dependencies {
     // Dagger
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val annotations = "org.glassfish:javax.annotation:${Versions.annotations}"
     // Secure Shared Preferences
     const val securePrefs = "in.co.ophio:secure-preferences:${Versions.securePrefs}"
     // BitcoinJz
