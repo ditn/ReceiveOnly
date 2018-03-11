@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.data.models
+package uk.co.adambennett.core.data.models
 
 import com.squareup.moshi.Json
 

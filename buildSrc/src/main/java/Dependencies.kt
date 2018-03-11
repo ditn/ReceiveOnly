@@ -96,7 +96,7 @@ object Dependencies {
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     // Secure Shared Preferences
-    const val securePrefs = "in.co.ophio:secure-preferences:${Versions.securePrefs}"
+    const val securePrefs = "in.uk.co.ophio:secure-preferences:${Versions.securePrefs}"
     // BitcoinJ
     const val bitcoinJ = "org.bitcoinj:bitcoinj-core:${Versions.bitcoinJ}"
     // QR Reader

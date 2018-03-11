@@ -24,7 +24,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 
-
 /**
  * Applies standard Schedulers to an [Observable], ie IO for subscription, Main Thread for
  * onNext/onComplete/onError.

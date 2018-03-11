@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-package com.adambennett.core
+package uk.co.adambennett.core.data.api
 
-class PlaceHolder
+const val BASE_API: String = "https://blockchain.info"
+
+const val PATH_MULTI_ADDRESS = "/multiaddr"
+

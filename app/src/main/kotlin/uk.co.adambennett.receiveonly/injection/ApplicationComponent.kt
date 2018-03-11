@@ -16,7 +16,7 @@
 
 package uk.co.adambennett.receiveonly.injection
 
-import com.adambennett.core.di.ApiModule
+import uk.co.adambennett.core.di.ApiModule
 import dagger.Component
 import uk.co.adambennett.receiveonly.ui.transactionlist.TransactionListActivity
 import javax.inject.Singleton

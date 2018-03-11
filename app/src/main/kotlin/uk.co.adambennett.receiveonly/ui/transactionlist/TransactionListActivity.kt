@@ -21,7 +21,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.adambennett.core.data.models.Tx
+import uk.co.adambennett.core.data.models.Tx
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import timber.log.Timber
 import uk.co.adambennett.receiveonly.R

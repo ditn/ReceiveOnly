@@ -7,7 +7,7 @@ android {
     compileSdkVersion Versions.compileSdk
     buildToolsVersion Versions.buildTools
     defaultConfig {
-        applicationId "uk.co.adambennett.receiveonly"
+        applicationId "uk.uk.co.adambennett.receiveonly"
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
         versionCode Versions.versionCode

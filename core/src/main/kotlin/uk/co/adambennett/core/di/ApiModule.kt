@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.di
+package uk.co.adambennett.core.di
 
-import com.adambennett.core.data.ApiInterceptor
-import com.adambennett.core.data.api.BASE_API
+import uk.co.adambennett.core.data.ApiInterceptor
+import uk.co.adambennett.core.data.api.BASE_API
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

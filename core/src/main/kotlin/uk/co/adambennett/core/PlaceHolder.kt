@@ -14,17 +14,6 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.data.api
+package uk.co.adambennett.core
 
-import com.adambennett.core.data.models.MultiAddressResponse
-import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Query
-
-interface MultiAddress {
-
-    @GET(PATH_MULTI_ADDRESS)
-    fun getTransactions(@Query("active") xpub: String): Single<MultiAddressResponse>
-
-}
-
+class PlaceHolder

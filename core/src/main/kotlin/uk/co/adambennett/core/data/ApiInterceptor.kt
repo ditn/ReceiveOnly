@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.data
+package uk.co.adambennett.core.data
 
 import mu.KotlinLogging
 import okhttp3.Interceptor

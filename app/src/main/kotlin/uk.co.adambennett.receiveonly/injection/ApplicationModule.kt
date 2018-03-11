@@ -67,7 +67,7 @@ class ApplicationModule(private val application: Application) {
 
     companion object {
 
-        private const val XPUB_PREFS: String = "uk.co.adambennett.xpub_prefs"
+        private const val XPUB_PREFS: String = "uk.uk.co.adambennett.xpub_prefs"
 
     }
 

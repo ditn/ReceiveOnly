@@ -18,7 +18,7 @@ package uk.co.adambennett.receiveonly.injection
 
 import android.app.Application
 import android.content.Context
-import com.adambennett.core.di.ApiModule
+import uk.co.adambennett.core.di.ApiModule
 
 open class Injector private constructor() {
 

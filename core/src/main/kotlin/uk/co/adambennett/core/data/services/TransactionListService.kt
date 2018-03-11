@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.data.services
+package uk.co.adambennett.core.data.services
 
-import com.adambennett.core.data.api.MultiAddress
-import com.adambennett.core.data.models.MultiAddressResponse
+import uk.co.adambennett.core.data.api.MultiAddress
+import uk.co.adambennett.core.data.models.MultiAddressResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
 import javax.inject.Inject

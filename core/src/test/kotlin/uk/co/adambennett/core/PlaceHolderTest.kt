@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package com.adambennett.core
+package uk.co.adambennett.core
 
 class PlaceHolderTest

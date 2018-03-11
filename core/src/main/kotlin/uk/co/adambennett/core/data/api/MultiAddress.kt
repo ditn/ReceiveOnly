@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 
-package com.adambennett.core.data.api
+package uk.co.adambennett.core.data.api
 
-const val BASE_API: String = "https://blockchain.info"
+import uk.co.adambennett.core.data.models.MultiAddressResponse
+import io.reactivex.Single
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-const val PATH_MULTI_ADDRESS = "/multiaddr"
+interface MultiAddress {
+
+    @GET(PATH_MULTI_ADDRESS)
+    fun getTransactions(@Query("active") xpub: String): Single<MultiAddressResponse>
+
+}
 
