@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.injection
+package com.adambennett.core.di
 
+import com.adambennett.core.data.ApiInterceptor
+import com.adambennett.core.data.api.BASE_API
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import uk.co.adambennett.receiveonly.data.api.ApiInterceptor
-import uk.co.adambennett.receiveonly.data.api.BASE_API
-import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import javax.inject.Singleton
 
 @Module
@@ -47,12 +46,6 @@ class ApiModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideTransactionListService(retrofit: Retrofit): TransactionListService {
-        return TransactionListService(retrofit)
     }
 
 }

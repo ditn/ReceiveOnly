@@ -18,13 +18,13 @@ package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.adambennett.core.data.models.Tx
 import kotlinx.android.synthetic.main.activity_transaction_list.*
+import timber.log.Timber
 import uk.co.adambennett.receiveonly.R
-import uk.co.adambennett.receiveonly.data.models.Tx
 import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
 import uk.co.adambennett.receiveonly.ui.states.UiState
@@ -48,7 +48,7 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         setSupportActionBar(toolbar)
 
         recyclerview.adapter = TransactionListAdapter(Collections.emptyList()) {
-            Log.d("TAG", "Clicked: $it")
+            Timber.d("Clicked: $it")
         }
 
         recyclerview.layoutManager = LinearLayoutManager(this)

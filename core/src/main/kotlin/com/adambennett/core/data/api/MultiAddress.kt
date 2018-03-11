@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data.api
+package com.adambennett.core.data.api
 
-import io.reactivex.Observable
+import com.adambennett.core.data.models.MultiAddressResponse
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import uk.co.adambennett.receiveonly.data.models.MultiAddressResponse
 
 interface MultiAddress {
 
     @GET(PATH_MULTI_ADDRESS)
-    fun getTransactions(@Query("active") xpub: String): Observable<MultiAddressResponse>
+    fun getTransactions(@Query("active") xpub: String): Single<MultiAddressResponse>
 
 }
 

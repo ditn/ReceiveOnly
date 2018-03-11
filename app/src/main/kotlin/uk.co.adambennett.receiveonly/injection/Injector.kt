@@ -18,6 +18,7 @@ package uk.co.adambennett.receiveonly.injection
 
 import android.app.Application
 import android.content.Context
+import com.adambennett.core.di.ApiModule
 
 open class Injector private constructor() {
 
@@ -35,20 +36,17 @@ open class Injector private constructor() {
 
         val applicationModule = ApplicationModule(applicationContext as Application)
         val apiModule = ApiModule()
-        val dataStoreModule = DataStoreModule()
 
-        initAppComponent(applicationModule, apiModule, dataStoreModule)
+        initAppComponent(applicationModule, apiModule)
     }
 
-    protected fun initAppComponent(
+    private fun initAppComponent(
         applicationModule: ApplicationModule,
-        apiModule: ApiModule,
-        dataStoreModule: DataStoreModule
+        apiModule: ApiModule
     ) {
         applicationComponent = DaggerApplicationComponent.builder()
             .applicationModule(applicationModule)
             .apiModule(apiModule)
-            .dataStoreModule(dataStoreModule)
             .build()
     }
 

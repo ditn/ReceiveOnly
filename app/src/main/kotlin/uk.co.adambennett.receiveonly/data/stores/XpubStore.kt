@@ -17,17 +17,20 @@
 package uk.co.adambennett.receiveonly.data.stores
 
 import android.content.SharedPreferences
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class XpubStore(private val securePrefs: SharedPreferences) {
+@Singleton
+class XpubStore @Inject constructor(private val securePrefs: SharedPreferences) {
 
-    private val KEY_X_PUB = "uk.co.adambennett.key_x_pub"
-
-    fun storeXpub(xpub: String) {
-        securePrefs.edit().putString(KEY_X_PUB, xpub).apply()
+    fun storeXpub(xPub: String) {
+        securePrefs.edit().putString(Companion.KEY_X_PUB, xPub).apply()
     }
 
-    fun retrieveXpub(): String? {
-        return securePrefs.getString(KEY_X_PUB, null)
+    fun retrieveXpub(): String? = securePrefs.getString(Companion.KEY_X_PUB, null)
+
+    companion object {
+        private const val KEY_X_PUB = "uk.co.adambennett.key_x_pub"
     }
 
 }

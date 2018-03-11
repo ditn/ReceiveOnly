@@ -49,11 +49,12 @@ dependencies {
     implementation Dependencies.rxAndroid
     // Dagger2
     kapt Dependencies.daggerCompiler
-    compileOnly Dependencies.annotations
     // Secure Shared Preferences
     implementation Dependencies.securePrefs
     // QR Scanning
     implementation Dependencies.qrReader
+    // Logging
+    implementation Dependencies.timber
 
     // Integration Test dependencies
     androidTestImplementation(Dependencies.espressoCore, {

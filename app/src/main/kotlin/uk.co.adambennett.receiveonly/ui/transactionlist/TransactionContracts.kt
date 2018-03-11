@@ -16,7 +16,7 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
-import uk.co.adambennett.receiveonly.data.models.Tx
+import com.adambennett.core.data.models.Tx
 import uk.co.adambennett.receiveonly.ui.base.Presenter
 import uk.co.adambennett.receiveonly.ui.base.View
 import uk.co.adambennett.receiveonly.ui.states.UiState

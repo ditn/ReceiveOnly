@@ -16,8 +16,8 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
+import com.adambennett.core.data.services.TransactionListService
 import org.bitcoinj.utils.BtcFixedFormat
-import uk.co.adambennett.receiveonly.data.services.TransactionListService
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 import uk.co.adambennett.receiveonly.ui.states.UiState
 import uk.co.adambennett.receiveonly.util.annotations.Unscoped

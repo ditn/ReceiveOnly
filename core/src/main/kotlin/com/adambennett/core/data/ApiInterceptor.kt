@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data.api
+package com.adambennett.core.data
 
+import mu.KotlinLogging
 import okhttp3.Interceptor
 import okhttp3.RequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import okio.Buffer
-import timber.log.Timber
 import java.io.IOException
 import java.util.*
 
 class ApiInterceptor : Interceptor {
+
+    private val logging = KotlinLogging.logger {}
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -43,7 +45,7 @@ class ApiInterceptor : Interceptor {
             requestLog = "\n" + requestLog + "\n" + requestBodyToString(request.body())
         }
 
-        Timber.d("Request:\n$requestLog")
+        logging.debug { "Request:\n$requestLog" }
 
         val response = chain.proceed(request)
         val endTime = System.nanoTime()
@@ -58,9 +60,9 @@ class ApiInterceptor : Interceptor {
 
         val bodyString = response.body()!!.string()
         if (response.code() == 200) {
-            Timber.d("Response:\n$responseLog\n$bodyString")
+            logging.debug { "Response:\n$responseLog\n$bodyString" }
         } else {
-            Timber.e("Response:\n$responseLog\n$bodyString")
+            logging.error { "Response:\n$responseLog\n$bodyString" }
         }
 
         return response.newBuilder()

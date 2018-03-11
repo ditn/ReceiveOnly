@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data.services
+package com.adambennett.core.data.services
 
-import io.reactivex.Observable
+import com.adambennett.core.data.api.MultiAddress
+import com.adambennett.core.data.models.MultiAddressResponse
+import io.reactivex.Single
 import retrofit2.Retrofit
-import uk.co.adambennett.receiveonly.data.api.MultiAddress
-import uk.co.adambennett.receiveonly.data.models.MultiAddressResponse
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TransactionListService constructor(retrofit: Retrofit) {
+@Singleton
+class TransactionListService @Inject constructor(retrofit: Retrofit) {
 
+    // TODO: Inject a fully-formed service? Not sure if necessary
     private val service: MultiAddress = retrofit.create(MultiAddress::class.java)
 
     /**
      * Returns an up-to-date {@link MultiAddressResponse} object
      */
-    fun getMultiAddressObject(xPub: String): Observable<MultiAddressResponse> {
-        return service.getTransactions(xPub)
-    }
+    fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
+        service.getTransactions(xPub)
 
 }

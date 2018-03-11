@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.data.api
+package com.adambennett.core
 
-const val BASE_API: String = "https://blockchain.info"
-
-const val PATH_MULTI_ADDRESS = "/multiaddr"
-
+class PlaceHolderTest

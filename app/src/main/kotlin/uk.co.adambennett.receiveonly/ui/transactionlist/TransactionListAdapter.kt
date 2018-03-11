@@ -23,7 +23,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import org.bitcoinj.utils.BtcFormat
 import uk.co.adambennett.receiveonly.R
-import uk.co.adambennett.receiveonly.data.models.Tx
+import com.adambennett.core.data.models.Tx
 import java.text.SimpleDateFormat
 import java.util.*
 

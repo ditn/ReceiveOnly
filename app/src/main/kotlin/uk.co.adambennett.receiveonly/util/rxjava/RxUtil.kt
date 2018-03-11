@@ -18,6 +18,7 @@ package uk.co.adambennett.receiveonly.util.rxjava
 
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -33,7 +34,15 @@ fun <T> Observable<T>.applySchedulers(): Observable<T> {
 }
 
 /**
- * Applies standard Schedulers to a [io.reactivex.Completable], ie IO for subscription,
+ * Applies standard Schedulers to a [Single], ie IO for subscription, Main Thread for
+ * onNext/onComplete/onError.
+ */
+fun <T> Single<T>.applySchedulers(): Single<T> {
+    return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+}
+
+/**
+ * Applies standard Schedulers to a [Completable], ie IO for subscription,
  * Main Thread for onNext/onComplete/onError.
  */
 fun Completable.applySchedulers(): Completable {
@@ -45,5 +54,13 @@ fun Completable.applySchedulers(): Completable {
  * safety.
  */
 fun <T> Observable<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Observable<T> {
+    return doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
+}
+
+/**
+ * Places subscription into the [CompositeDisposable] belonging to a [BasePresenter] for memory
+ * safety.
+ */
+fun <T> Single<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Single<T> {
     return doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
 }

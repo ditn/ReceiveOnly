@@ -14,22 +14,9 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.receiveonly.injection
+package com.adambennett.core.data.api
 
-import android.content.SharedPreferences
-import dagger.Module
-import dagger.Provides
-import uk.co.adambennett.receiveonly.data.stores.XpubStore
-import javax.inject.Named
-import javax.inject.Singleton
+const val BASE_API: String = "https://blockchain.info"
 
-@Module
-class DataStoreModule {
+const val PATH_MULTI_ADDRESS = "/multiaddr"
 
-    @Provides
-    @Singleton
-    fun provideXpubStore(@Named("secure") securePrefs: SharedPreferences): XpubStore {
-        return XpubStore(securePrefs)
-    }
-
-}
