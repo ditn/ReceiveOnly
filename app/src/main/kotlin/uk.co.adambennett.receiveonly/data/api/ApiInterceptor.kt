@@ -16,12 +16,12 @@
 
 package uk.co.adambennett.receiveonly.data.api
 
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.RequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import okio.Buffer
+import timber.log.Timber
 import java.io.IOException
 import java.util.*
 
@@ -43,7 +43,7 @@ class ApiInterceptor : Interceptor {
             requestLog = "\n" + requestLog + "\n" + requestBodyToString(request.body())
         }
 
-        Log.d(Companion.TAG, "Request:\n$requestLog")
+        Timber.d("Request:\n$requestLog")
 
         val response = chain.proceed(request)
         val endTime = System.nanoTime()
@@ -58,9 +58,9 @@ class ApiInterceptor : Interceptor {
 
         val bodyString = response.body()!!.string()
         if (response.code() == 200) {
-            Log.d(Companion.TAG, "Response:\n$responseLog\n$bodyString")
+            Timber.d("Response:\n$responseLog\n$bodyString")
         } else {
-            Log.e(Companion.TAG, "Response:\n$responseLog\n$bodyString")
+            Timber.e("Response:\n$responseLog\n$bodyString")
         }
 
         return response.newBuilder()
@@ -70,24 +70,18 @@ class ApiInterceptor : Interceptor {
 
     private fun requestBodyToString(request: RequestBody?): String {
         val buffer = Buffer()
-        try {
+        return try {
             if (request != null) {
                 request.writeTo(buffer)
-                return buffer.readUtf8()
+                buffer.readUtf8()
             } else {
-                return ""
+                ""
             }
         } catch (e: IOException) {
-            return "IOException reading request body"
+            "IOException reading request body"
         } finally {
             buffer.close()
         }
-    }
-
-    companion object {
-
-        private val TAG = ApiInterceptor::class.java.simpleName
-
     }
 
 }

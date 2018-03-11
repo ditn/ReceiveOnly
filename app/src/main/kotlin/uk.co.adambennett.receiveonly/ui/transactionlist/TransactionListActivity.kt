@@ -48,7 +48,7 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         setSupportActionBar(toolbar)
 
         recyclerview.adapter = TransactionListAdapter(Collections.emptyList()) {
-            Log.d("TAG", "Clicked: " + it)
+            Log.d("TAG", "Clicked: $it")
         }
 
         recyclerview.layoutManager = LinearLayoutManager(this)

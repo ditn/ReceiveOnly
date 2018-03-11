@@ -33,6 +33,7 @@ object Versions {
     // Google
     const val supportVersion = "27.0.2"
     const val constraintLayout = "1.0.2"
+    const val room = "1.0.0"
     const val playServices = "11.8.0"
     // Arch
     const val dagger = "2.15"
@@ -50,6 +51,8 @@ object Versions {
     // Testing
     const val espresso = "2.2.2"
     const val jUnit = "4.12"
+    // Logging
+    const val timber = "4.6.1"
 }
 
 object Dependencies {
@@ -64,7 +67,18 @@ object Dependencies {
     const val cardview = "com.android.support:cardview-v7:${Versions.supportVersion}"
     const val recyclerviewV7 = "com.android.support:recyclerview-v7:${Versions.supportVersion}"
     // Constraint Layout
-    const val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
+    const val constraintLayout =
+        "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
+    // Room
+    const val roomRuntime = "android.arch.persistence.room:runtime:${Versions.room}"
+    // Room annotation processor
+    const val roomCompiler = "android.arch.persistence.room:compiler:${Versions.room}"
+    // Room Rx Bindings
+    const val roomRxJava = "android.arch.persistence.room:rxjava2:${Versions.room}"
+    // Paging
+    const val roomPaging = "android.arch.paging:runtime:1.0.0-a${Versions.room}"
+    // Test helpers for Room
+    const val roomTesting = "android.arch.persistence.room:testing:${Versions.room}"
     // Play Services
     const val playServices = "com.google.android.gms:play-services-vision:${Versions.playServices}"
     // RxJava
@@ -84,7 +98,7 @@ object Dependencies {
     const val annotations = "org.glassfish:javax.annotation:${Versions.annotations}"
     // Secure Shared Preferences
     const val securePrefs = "in.co.ophio:secure-preferences:${Versions.securePrefs}"
-    // BitcoinJz
+    // BitcoinJ
     const val bitcoinJ = "org.bitcoinj:bitcoinj-core:${Versions.bitcoinJ}"
     // QR Reader
     const val qrReader = "com.github.nisrulz:qreader:${Versions.qrReader}"
@@ -92,5 +106,7 @@ object Dependencies {
     const val espressoCore = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
     // JUnit
     const val jUnit = "junit:junit:${Versions.jUnit}"
+    // Logging
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
 }

@@ -19,6 +19,8 @@ dependencies {
     api Dependencies.bitcoinJ
     // Dagger2
     api Dependencies.dagger
+    // Timber
+    api Dependencies.timber
 
     // Unit Test dependencies
     testImplementation Dependencies.jUnit
