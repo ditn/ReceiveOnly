@@ -26,12 +26,6 @@ android {
     }
 }
 
-kapt {
-    // Necessary for Kotlin to work correctly with Dagger2 when building release builds or
-    // via the command line
-    generateStubs = true
-}
-
 dependencies {
     implementation project(':core')
     // Persistence
