@@ -18,7 +18,7 @@ package uk.co.adambennett.core.data.models
 
 import com.squareup.moshi.Json
 
-class MultiAddressResponse(
+data class MultiAddressResponse(
     @Json(name = "recommend_include_fee") val recommendIncludeFee: Boolean,
     @Json(name = "sharedcoin_endpoint") val sharedcoinEndpoint: String,
     val info: Info,
@@ -27,7 +27,7 @@ class MultiAddressResponse(
     val txs: List<Tx>
 )
 
-class Info(
+data class Info(
     val nconnected: Int,
     val conversion: Double,
     @Json(name = "symbol_local") val symbolLocal: SymbolLocal,
@@ -35,7 +35,7 @@ class Info(
     @Json(name = "latest_block") val latestBlock: LatestBlock
 )
 
-class Wallet(
+data class Wallet(
     @Json(name = "n_tx") val nTx: Int,
     @Json(name = "n_tx_filtered") val nTxFiltered: Int,
     @Json(name = "total_received") val totalReceived: Long,
@@ -44,7 +44,7 @@ class Wallet(
 )
 
 
-class Address(
+data class Address(
     val address: String,
     @Json(name = "n_tx") val n_tx: Int,
     @Json(name = "total_received") val totalReceived: Long,
@@ -55,7 +55,7 @@ class Address(
     @Json(name = "account_index") val accountIndex: Int
 )
 
-class Tx(
+data class Tx(
     val hash: String,
     val ver: Int,
     @Json(name = "vin_sz") val vinSz: Int,
@@ -73,13 +73,13 @@ class Tx(
     val out: List<Out>
 )
 
-class Input(
+data class Input(
     @Json(name = "prev_out") val prevOut: PrevOut,
     val sequence: Long,
     val script: String
 )
 
-class Out(
+data class Out(
     val value: Long,
     @Json(name = "tx_index") val txIndex: Long,
     val n: Int,
@@ -90,7 +90,7 @@ class Out(
     val xpub: Xpub
 )
 
-class PrevOut(
+data class PrevOut(
     val value: Long,
     @Json(name = "tx_index") val txIndex: Long,
     val n: Int,
@@ -101,7 +101,7 @@ class PrevOut(
     val xpub: Xpub
 )
 
-class SymbolLocal(
+data class SymbolLocal(
     val code: String,
     val symbol: String,
     val name: String,
@@ -110,7 +110,7 @@ class SymbolLocal(
     val local: Boolean
 )
 
-class SymbolBtc(
+data class SymbolBtc(
     val code: String,
     val symbol: String,
     val name: String,
@@ -119,14 +119,14 @@ class SymbolBtc(
     val local: Boolean
 )
 
-class LatestBlock(
+data class LatestBlock(
     @Json(name = "block_index") val blockIndex: Long,
     val hash: String,
     val height: Long,
     val time: Long
 )
 
-class Xpub(
+data class Xpub(
     val m: String,
     val path: String
 )

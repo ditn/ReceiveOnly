@@ -22,12 +22,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import org.bitcoinj.utils.BtcFormat
-import uk.co.adambennett.core.data.models.Tx
+import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionListAdapter(private var items: List<Tx>, private val listener: (Tx) -> Unit) :
+class TransactionListAdapter(private var items: List<Transaction>, private val listener: (Transaction) -> Unit) :
     RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
@@ -42,20 +42,20 @@ class TransactionListAdapter(private var items: List<Tx>, private val listener: 
         return TransactionViewHolder(view, listener)
     }
 
-    fun updateTransactions(items: List<Tx>) {
+    fun updateTransactions(items: List<Transaction>) {
         this.items = items
         // TODO: 12/03/2017 Use diffUtil
         notifyDataSetChanged()
     }
 
-    inner class TransactionViewHolder(itemView: View?, private val listener: (Tx) -> Unit) :
+    inner class TransactionViewHolder(itemView: View?, private val listener: (Transaction) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
 
         val direction: TextView = itemView?.findViewById(R.id.direction) as TextView
         val date: TextView = itemView?.findViewById(R.id.date) as TextView
         val amount: TextView = itemView?.findViewById(R.id.amount) as TextView
 
-        fun bindTransaction(transaction: Tx) {
+        fun bindTransaction(transaction: Transaction) {
             itemView.setOnClickListener { listener(transaction) }
 
             val txDate = Date(transaction.time * 1000)

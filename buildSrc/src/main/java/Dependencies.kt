@@ -27,8 +27,8 @@ object Versions {
     const val buildTools = "27.0.3"
 
     // Build tools and languages
-    const val androidGradlePlugin = "3.0.1"
-    const val kotlin = "1.2.30"
+    const val androidGradlePlugin = "3.1.0"
+    const val kotlin = "1.2.31"
 
     // Google
     const val supportVersion = "27.1.0"
@@ -61,7 +61,7 @@ object Dependencies {
     // Build tools and languages
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     // Support Libraries
     const val appcompatV7 = "com.android.support:appcompat-v7:${Versions.supportVersion}"
     const val design = "com.android.support:design:${Versions.supportVersion}"

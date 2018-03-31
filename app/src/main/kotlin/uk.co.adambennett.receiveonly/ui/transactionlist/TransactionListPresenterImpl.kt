@@ -16,8 +16,8 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
-import org.bitcoinj.utils.BtcFixedFormat
-import uk.co.adambennett.core.data.services.TransactionListService
+import uk.co.adambennett.androidcore.extensions.log
+import uk.co.adambennett.androidcore.transactions.repository.TransactionsRepository
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 import uk.co.adambennett.receiveonly.ui.states.UiState
 import uk.co.adambennett.receiveonly.util.annotations.Unscoped
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @Unscoped
 class TransactionListPresenterImpl @Inject constructor(
-    private val transactionListService: TransactionListService
+    private val transactions: TransactionsRepository
 ): BasePresenter<TransactionListView>(),
     TransactionListPresenter {
 
@@ -38,24 +38,26 @@ class TransactionListPresenterImpl @Inject constructor(
     }
 
     override fun onTransactionsRequested() {
-        transactionListService
+        transactions
             // Random xPub lifted from a Google search; has a few small transactions
-            .getMultiAddressObject("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .getTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .log()
             .applySchedulers()
             .addToCompositeDisposable(this)
             .doOnSubscribe { view.updateUiState(UiState.LOADING) }
+            .toList()
             .subscribe(
-                { response ->
-                    if (response.txs.isEmpty()) {
+                { list ->
+                    if (list.isEmpty()) {
                         view.updateUiState(UiState.EMPTY)
                     } else {
-                        view.onTransactionsLoaded(response.txs)
+                        view.onTransactionsLoaded(list)
                         view.updateUiState(UiState.CONTENT)
                     }
-                    val formattedTotal =
-                        BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
-
-                    view.onBalanceLoaded(formattedTotal)
+//                    val formattedTotal =
+//                        BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
+//
+//                    view.onBalanceLoaded(formattedTotal)
 
                 }, { _ ->
                     view.updateUiState(UiState.FAILED)

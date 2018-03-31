@@ -14,6 +14,11 @@ android {
         versionName Versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,12 +31,6 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
-}
-
-kapt {
-    // Necessary for Kotlin to work correctly with Dagger2 when building release builds or
-    // via the command line
-    generateStubs = true
 }
 
 dependencies {

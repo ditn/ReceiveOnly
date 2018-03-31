@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.core.data.services
+package uk.co.adambennett.androidcore.transactions.db
 
+import android.arch.persistence.room.*
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import io.reactivex.Single
-import retrofit2.Retrofit
-import uk.co.adambennett.core.data.api.MultiAddress
-import uk.co.adambennett.core.data.models.MultiAddressResponse
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class TransactionListService @Inject constructor(retrofit: Retrofit) {
 
-    private val service: MultiAddress = retrofit.create(MultiAddress::class.java)
+@Database(entities = [Transaction::class], version = 1)
+abstract class TransactionsDb : RoomDatabase() {
 
-    /**
-     * Returns an up-to-date {@link MultiAddressResponse} object
-     */
-    fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
-        service.getTransactions(xPub)
+    abstract fun transactionDao(): TransactionDao
+
+}
+
+
+@Dao
+interface TransactionDao {
+
+    @Insert(onConflict = REPLACE)
+    fun save(transaction: Transaction)
+
+    @Query("SELECT * FROM transactions WHERE hash = :hash")
+    fun loadTx(hash: String): Single<Transaction>
+
+    @Query("SELECT * FROM transactions")
+    fun loadAll(): Single<List<Transaction>>
 
 }
