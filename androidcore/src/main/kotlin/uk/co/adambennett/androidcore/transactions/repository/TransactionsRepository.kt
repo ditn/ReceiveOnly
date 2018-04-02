@@ -17,9 +17,8 @@
 package uk.co.adambennett.androidcore.transactions.repository
 
 import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.functions.Function
-import uk.co.adambennett.androidcore.base.FreshFetchStrategy
+import uk.co.adambennett.androidcore.base.AbstractRepository
+import uk.co.adambennett.androidcore.extensions.unroll
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.androidcore.transactions.db.TransactionDao
 import uk.co.adambennett.core.data.models.Tx
@@ -34,32 +33,26 @@ class TransactionsRepository @Inject constructor(
     private val transactionListService: TransactionListService
 ) {
 
-    fun getTransactions(xPub: String): Observable<Transaction> {
-        return Single.create<List<Transaction>> { emitter ->
-            object : FreshFetchStrategy<List<Transaction>, List<Tx>>(emitter) {
-                override val remote: Single<List<Tx>>
-                    get() = transactionListService.getMultiAddressObject(xPub).map { it.txs }
-                override val local: Single<List<Transaction>>
-                    get() = transactionsDao.loadAll()
-
-                override fun saveCallResult(data: List<Transaction>) {
-                    data.forEach { transactionsDao.save(it) }
-                }
-
-                override fun mapper(): Function<List<Tx>, List<Transaction>> =
-                    Function { it.map { Transaction.mapFrom(it) } }
-
-            }
-        }.toObservable()
+    fun fetchTransactions(xPub: String): Observable<Transaction> =
+        createRepository(xPub).fetch()
+            .toObservable()
             .flatMapIterable { it }
-    }
 
-//    return Observable.concatArray(
-//    getUsersFromDb(),
-//    getUsersFromApi()
-//    .materialize()
-//    .filter{ !it.isOnError }
-//    .dematerialize<List<User>>()
-//    )
+    fun refreshTransactions(xPub: String): Observable<Transaction> =
+        createRepository(xPub).forceFetch()
+            .toObservable()
+            .flatMapIterable { it }
 
+    private fun createRepository(xPub: String): AbstractRepository<List<Transaction>, List<Tx>> =
+        object : AbstractRepository<List<Transaction>, List<Tx>>(
+            transactionListService.getMultiAddressObject(xPub).map { it.txs },
+            transactionsDao.loadAll().filter { !it.isEmpty() }
+        ) {
+            override fun saveCallResult(data: List<Transaction>) {
+                transactionsDao.saveAll(data)
+            }
+
+            override fun mapper(data: List<Tx>): List<Transaction> =
+                data.unroll { Transaction.mapFrom(it) }
+        }
 }

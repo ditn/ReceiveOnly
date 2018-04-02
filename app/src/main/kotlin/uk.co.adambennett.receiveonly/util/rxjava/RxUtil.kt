@@ -17,6 +17,7 @@
 package uk.co.adambennett.receiveonly.util.rxjava
 
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,38 +29,54 @@ import uk.co.adambennett.receiveonly.ui.base.BasePresenter
  * Applies standard Schedulers to an [Observable], ie IO for subscription, Main Thread for
  * onNext/onComplete/onError.
  */
-fun <T> Observable<T>.applySchedulers(): Observable<T> {
-    return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-}
+fun <T> Observable<T>.applySchedulers(): Observable<T> =
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Applies standard Schedulers to a [Single], ie IO for subscription, Main Thread for
  * onNext/onComplete/onError.
  */
-fun <T> Single<T>.applySchedulers(): Single<T> {
-    return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-}
+fun <T> Single<T>.applySchedulers(): Single<T> =
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+
+/**
+ * Applies standard Schedulers to a [Maybe], ie IO for subscription, Main Thread for
+ * onNext/onComplete/onError.
+ */
+fun <T> Maybe<T>.applySchedulers(): Maybe<T> =
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Applies standard Schedulers to a [Completable], ie IO for subscription,
  * Main Thread for onNext/onComplete/onError.
  */
-fun Completable.applySchedulers(): Completable {
-    return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-}
+fun Completable.applySchedulers(): Completable =
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Places subscription into the [CompositeDisposable] belonging to a [BasePresenter] for memory
  * safety.
  */
-fun <T> Observable<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Observable<T> {
-    return doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
-}
+fun <T> Observable<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Observable<T> =
+    doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
 
 /**
  * Places subscription into the [CompositeDisposable] belonging to a [BasePresenter] for memory
  * safety.
  */
-fun <T> Single<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Single<T> {
-    return doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
-}
+fun <T> Single<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Single<T> =
+    doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
+
+/**
+ * Places subscription into the [CompositeDisposable] belonging to a [BasePresenter] for memory
+ * safety.
+ */
+fun <T> Maybe<T>.addToCompositeDisposable(presenter: BasePresenter<*>): Maybe<T> =
+    doOnSubscribe { it -> presenter.compositeDisposable.add(it) }
+
+/**
+ * Places subscription into the [CompositeDisposable] belonging to a [BasePresenter] for memory
+ * safety.
+ */
+fun Completable.addToCompositeDisposable(presenter: BasePresenter<*>): Completable =
+    doOnSubscribe { it -> presenter.compositeDisposable.add(it) }

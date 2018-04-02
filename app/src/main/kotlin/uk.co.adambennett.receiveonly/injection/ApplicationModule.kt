@@ -47,7 +47,7 @@ class ApplicationModule(private val application: Application) {
     @Singleton
     fun provideTransactionsDb(): TransactionsDb = Room.databaseBuilder(
         application,
-        TransactionsDb::class.java, "transactions"
+        TransactionsDb::class.java, "transactions-db"
     ).build()
 
     @Provides

@@ -33,5 +33,4 @@ class TransactionListService @Inject constructor(retrofit: Retrofit) {
      */
     fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
         service.getTransactions(xPub)
-
 }

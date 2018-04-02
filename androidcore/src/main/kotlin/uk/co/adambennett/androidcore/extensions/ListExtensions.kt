@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.core.data.api
+package uk.co.adambennett.androidcore.extensions
 
-import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Query
-import uk.co.adambennett.core.data.models.MultiAddressResponse
-
-interface MultiAddress {
-
-    @GET(PATH_MULTI_ADDRESS)
-    fun getTransactions(@Query("active") xPub: String): Single<MultiAddressResponse>
-
+fun <T, R> List<T>.unroll(mapper: (T) -> R) : List<R> {
+    val listToReturn = mutableListOf<R>()
+    this.forEach { mapTo(listToReturn, mapper) }
+    return listToReturn.toList()
 }
-

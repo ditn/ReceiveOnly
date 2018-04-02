@@ -16,7 +16,9 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
-import uk.co.adambennett.androidcore.extensions.log
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
+import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.androidcore.transactions.repository.TransactionsRepository
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 import uk.co.adambennett.receiveonly.ui.states.UiState
@@ -27,23 +29,31 @@ import javax.inject.Inject
 
 @Unscoped
 class TransactionListPresenterImpl @Inject constructor(
-    private val transactions: TransactionsRepository
-): BasePresenter<TransactionListView>(),
+    private val repository: TransactionsRepository
+) : BasePresenter<TransactionListView>(),
     TransactionListPresenter {
 
     // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
     override fun onViewReady() {
         super.onViewReady()
-        onTransactionsRequested()
+        fetchTransactions()
     }
 
     override fun onTransactionsRequested() {
-        transactions
-            // Random xPub lifted from a Google search; has a few small transactions
-            .getTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
-            .log()
-            .applySchedulers()
-            .addToCompositeDisposable(this)
+        // Random xPub lifted from a Google search; has a few small repository
+        repository
+            .refreshTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .subscribeAndUpdateUi()
+    }
+
+    private fun fetchTransactions() {
+        repository.fetchTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .subscribeAndUpdateUi()
+    }
+
+    private fun Observable<Transaction>.subscribeAndUpdateUi(): Disposable {
+        return this.applySchedulers()
+            .addToCompositeDisposable(this@TransactionListPresenterImpl)
             .doOnSubscribe { view.updateUiState(UiState.LOADING) }
             .toList()
             .subscribe(
