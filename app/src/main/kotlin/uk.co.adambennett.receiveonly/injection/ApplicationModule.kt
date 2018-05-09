@@ -19,7 +19,7 @@ package uk.co.adambennett.receiveonly.injection
 import `in`.co.ophio.secure.core.KeyStoreKeyGenerator
 import `in`.co.ophio.secure.core.ObscuredPreferencesBuilder
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager

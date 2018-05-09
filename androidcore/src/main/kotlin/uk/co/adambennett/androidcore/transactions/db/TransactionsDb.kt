@@ -16,8 +16,12 @@
 
 package uk.co.adambennett.androidcore.transactions.db
 
-import android.arch.persistence.room.*
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import androidx.room.Dao
+import androidx.room.Database
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.RoomDatabase
 import io.reactivex.Maybe
 
 

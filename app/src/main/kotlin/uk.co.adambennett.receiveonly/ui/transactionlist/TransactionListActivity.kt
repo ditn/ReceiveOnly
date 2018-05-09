@@ -17,10 +17,10 @@
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import timber.log.Timber
 import uk.co.adambennett.androidcore.transactions.db.Transaction

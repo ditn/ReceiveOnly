@@ -12,13 +12,8 @@ android {
         targetSdkVersion Versions.targetSdk
         versionCode Versions.versionCode
         versionName Versions.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
     }
     buildTypes {
         release {
@@ -37,8 +32,8 @@ dependencies {
     implementation project(':core')
     implementation project(':androidcore')
     // Support Libraries
-    implementation Dependencies.appcompatV7
-    implementation Dependencies.recyclerviewV7
+    implementation Dependencies.appcompat
+    implementation Dependencies.recyclerview
     implementation Dependencies.cardview
     implementation Dependencies.design
     // Play Services
