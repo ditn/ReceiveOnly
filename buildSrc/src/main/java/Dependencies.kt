@@ -27,11 +27,14 @@ object Versions {
     const val buildTools = "28.0.0-rc2"
 
     // Build tools and languages
-    const val androidGradlePlugin = "3.2.0-alpha14"
+    const val androidGradlePlugin = "3.2.0-alpha15"
     const val kotlin = "1.2.41"
 
-    // Google
+    // Android X + Google
+    // TODO: These will separate at some point
     const val androidX = "1.0.0-alpha1"
+    const val slices = "1.0.0-alpha1"
+    const val annotations = "1.0.0-alpha1"
     const val constraintLayout = "1.1.0"
     const val architecture = "2.0.0-alpha1"
     const val playServices = "11.8.0"
@@ -42,7 +45,7 @@ object Versions {
     // Networking
     const val okHttp = "3.7.0"
     const val retrofit = "2.3.0"
-    const val moshi = "1.4.0"
+    const val moshi = "1.6.0"
     // Other
     const val securePrefs = "0.1.3"
     const val bitcoinJ = "0.14.4"
@@ -67,7 +70,12 @@ object Dependencies {
     const val cardview = "androidx.cardview:cardview:${Versions.androidX}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.androidX}"
     // Constraint Layout
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val constraintLayout =
+            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    // Slices
+    const val slicesCore = "androidx.slice:slice-core:${Versions.slices}"
+    const val slicesBuilder = "androidx.slice:slice-builders:${Versions.slices}"
+    const val supportAnnotations = "androidx.annotation:annotation:${Versions.slices}"
     // Room
     const val roomRuntime = "androidx.room:room-runtime:${Versions.architecture}"
     // Room annotation processor

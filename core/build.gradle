@@ -17,7 +17,7 @@ dependencies {
     // Moshi
     api Dependencies.moshi
     // BitcoinJ
-    api Dependencies.bitcoinJ
+//    api Dependencies.bitcoinJ
     // Dagger2
     api Dependencies.dagger
     kapt Dependencies.daggerCompiler

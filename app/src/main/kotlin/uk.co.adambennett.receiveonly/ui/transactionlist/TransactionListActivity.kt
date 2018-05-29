@@ -25,6 +25,10 @@ import kotlinx.android.synthetic.main.activity_transaction_list.*
 import timber.log.Timber
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
+import uk.co.adambennett.receiveonly.R.id.collapsing_layout
+import uk.co.adambennett.receiveonly.R.id.loading_layout
+import uk.co.adambennett.receiveonly.R.id.recyclerview
+import uk.co.adambennett.receiveonly.R.id.swipe_refresh
 import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
 import uk.co.adambennett.receiveonly.ui.states.UiState
@@ -62,11 +66,9 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.settings -> consume { launchSettingsActivity() }
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.settings -> consume { launchSettingsActivity() }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun updateUiState(uiState: UiState) {
@@ -81,11 +83,11 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         collapsing_layout.title = balance
     }
 
-    fun launchSettingsActivity() {
+    private fun launchSettingsActivity() {
         TODO() // This should start a preferences page with night mode, format settings etc
     }
 
-    fun setUiState(state: UiState) {
+    private fun setUiState(state: UiState) {
         when (state) {
             UiState.CONTENT -> {
                 swipe_refresh.isRefreshing = false

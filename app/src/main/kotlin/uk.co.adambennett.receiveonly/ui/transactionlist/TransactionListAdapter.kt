@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.bitcoinj.utils.BtcFormat
+//import org.bitcoinj.utils.BtcFormat
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
 import java.text.SimpleDateFormat
@@ -67,7 +67,8 @@ class TransactionListAdapter(
             val dateFormatted = formatter.format(txDate)
             date.text = dateFormatted
 
-            val amountFormatted = BtcFormat.getCodeInstance().format(transaction.result)
+            val amountFormatted = transaction.result.toString()
+//                    BtcFormat.getCodeInstance().format(transaction.result)
             amount.text = amountFormatted
 
             when {

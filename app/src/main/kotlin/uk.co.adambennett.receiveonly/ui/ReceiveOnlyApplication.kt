@@ -17,11 +17,11 @@
 package uk.co.adambennett.receiveonly.ui
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import uk.co.adambennett.receiveonly.BuildConfig
 import uk.co.adambennett.receiveonly.injection.Injector
-
 
 class ReceiveOnlyApplication : Application() {
 
@@ -33,6 +33,8 @@ class ReceiveOnlyApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
     }
 

@@ -20,6 +20,7 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 import javax.inject.Singleton
 
+// TODO: Move me to androidcore
 @Singleton
 class XpubStore @Inject constructor(private val securePrefs: SharedPreferences) {
 

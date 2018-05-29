@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uk.co.adambennett.receiveonly.slices">
+
+    <application>
+
+        <provider
+            android:name=".CryptoPriceSliceProvider"
+            android:authorities="uk.co.adambennett.receiveonly"
+            android:grantUriPermissions="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.app.slice.category.SLICE" />
+
+                <data
+                    android:host="adambennett.co.uk"
+                    android:pathPrefix="/prices"
+                    android:scheme="http" />
+            </intent-filter>
+        </provider>
+    </application>
+
+</manifest>

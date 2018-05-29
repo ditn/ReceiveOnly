@@ -50,8 +50,6 @@ open class Injector private constructor() {
             .build()
     }
 
-    fun getAppComponent(): ApplicationComponent {
-        return applicationComponent
-    }
+    fun getAppComponent(): ApplicationComponent = applicationComponent
 
 }
