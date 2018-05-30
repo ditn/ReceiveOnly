@@ -80,8 +80,11 @@ class CryptoPriceSliceProvider : SliceProvider(), MemorySafeSubscription {
 
             ListBuilder(context, sliceUri, 30 * 60 * 1000)
                 .addRow {
-                    it.setTitle("${symbol.toUpperCase()} Price = $$price")
-                    it.addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
+                    with(it) {
+                        setTitle("${symbol.toUpperCase()} price", true)
+                        setSubtitle("$$price")
+                        addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
+                    }
                 }
                 .build()
         }
@@ -139,9 +142,9 @@ class CryptoPriceSliceProvider : SliceProvider(), MemorySafeSubscription {
         return ListBuilder(context, sliceUri, ListBuilder.INFINITY)
             .addRow {
                 it.apply {
-                    setTitle("Fetching ${getCurrencyForUri(sliceUri).symbol.toUpperCase()} price")
-                    setSubtitle(null, true)
-                    addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
+                    setTitle("${getCurrencyForUri(sliceUri).symbol.toUpperCase()} price", true)
+                    setSubtitle("Fetching...", true)
+                    addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE, true)
                 }
             }
             .build()

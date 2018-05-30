@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO: Remove me once app actions are a thing -->
+</resources>
+<!--<actions>-->
+    <!--&lt;!&ndash; Here we register for either built-in intents or register custom ones &ndash;&gt;-->
+    <!--&lt;!&ndash; This is a naive example based on IO presentation, may not be accurate and fiat currency-->
+     <!--isn't yet handled in URI &ndash;&gt;-->
+    <!--<action intentName="actions.intent.GET_CRYPTOCURRENCY_PRICE">-->
+        <!--<action-display label="Check crypto price"/>-->
+        <!--<fulfillment-->
+            <!--urlTemplate="https://adambennett.co.uk/prices/{?cryptocurrency, currency}">-->
+            <!--<parameter-mapping-->
+                <!--urlParameter="cryptocurrency"-->
+                <!--intentParameter="cryptocurrency.name"/>-->
+
+            <!--<parameter-mapping-->
+                <!--urlParameter="currency"-->
+                <!--intentParameter="target_monetary_spec.currency"/>-->
+
+        <!--</fulfillment>-->
+    <!--</action>-->
+<!--</actions>-->
+
