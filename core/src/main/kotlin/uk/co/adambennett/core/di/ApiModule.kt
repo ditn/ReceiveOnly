@@ -17,7 +17,7 @@
 package uk.co.adambennett.core.di
 
 import uk.co.adambennett.core.data.ApiInterceptor
-import uk.co.adambennett.core.data.api.BASE_API
+import uk.co.adambennett.core.data.api.BASE_BLOCK_EXPLORER
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -41,7 +41,7 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_API)
+            .baseUrl(BASE_BLOCK_EXPLORER)
             .client(client)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create())

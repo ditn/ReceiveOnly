@@ -27,7 +27,7 @@ object Versions {
     const val buildTools = "28.0.0-rc2"
 
     // Build tools and languages
-    const val androidGradlePlugin = "3.2.0-alpha15"
+    const val androidGradlePlugin = "3.2.0-alpha16"
     const val kotlin = "1.2.41"
 
     // Android X + Google

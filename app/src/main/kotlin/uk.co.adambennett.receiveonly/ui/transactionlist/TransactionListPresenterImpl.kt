@@ -33,21 +33,21 @@ class TransactionListPresenterImpl @Inject constructor(
 ) : BasePresenter<TransactionListView>(),
     TransactionListPresenter {
 
-    // TODO: 11/03/2017 Load xPub from encrypted storage. If not found, prompt user to add xPub
+    // TODO: 11/03/2017 Load X_PUB from encrypted storage. If not found, prompt user to add X_PUB
     override fun onViewReady() {
         super.onViewReady()
         fetchTransactions()
     }
 
     override fun onTransactionsRequested() {
-        // Random xPub lifted from a Google search; has a few small repository
+        // Random X_PUB lifted from a Google search; has a few small repository
         repository
-            .refreshTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+            .refreshTransactions(X_PUB)
             .subscribeAndUpdateUi()
     }
 
     private fun fetchTransactions() {
-        repository.fetchTransactions("xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz")
+        repository.fetchTransactions(X_PUB)
             .subscribeAndUpdateUi()
     }
 
@@ -73,6 +73,10 @@ class TransactionListPresenterImpl @Inject constructor(
                     view.updateUiState(UiState.FAILED)
                 }
             )
+    }
+
+    companion object {
+        private const val X_PUB = "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
     }
 
 }

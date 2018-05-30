@@ -18,7 +18,9 @@ package uk.co.adambennett.core.data.services
 
 import io.reactivex.Single
 import retrofit2.Retrofit
+import uk.co.adambennett.core.data.api.BASE_BLOCK_EXPLORER
 import uk.co.adambennett.core.data.api.MultiAddress
+import uk.co.adambennett.core.data.api.PATH_MULTI_ADDRESS
 import uk.co.adambennett.core.data.models.MultiAddressResponse
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,5 +34,5 @@ class TransactionListService @Inject constructor(retrofit: Retrofit) {
      * Returns an up-to-date {@link MultiAddressResponse} object
      */
     fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
-        service.getTransactions(xPub)
+            service.getTransactions(BASE_BLOCK_EXPLORER + PATH_MULTI_ADDRESS, xPub)
 }

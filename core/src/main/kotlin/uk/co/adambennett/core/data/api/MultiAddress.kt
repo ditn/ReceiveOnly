@@ -19,12 +19,16 @@ package uk.co.adambennett.core.data.api
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 import uk.co.adambennett.core.data.models.MultiAddressResponse
 
 interface MultiAddress {
 
-    @GET(PATH_MULTI_ADDRESS)
-    fun getTransactions(@Query("active") xPub: String): Single<MultiAddressResponse>
+    @GET
+    fun getTransactions(
+            @Url url: String,
+            @Query("active") xPub: String
+    ): Single<MultiAddressResponse>
 
 }
 

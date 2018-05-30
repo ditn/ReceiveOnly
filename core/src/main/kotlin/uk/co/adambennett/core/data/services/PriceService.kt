@@ -2,6 +2,8 @@ package uk.co.adambennett.core.data.services
 
 import io.reactivex.Single
 import retrofit2.Retrofit
+import uk.co.adambennett.core.data.api.BASE_API
+import uk.co.adambennett.core.data.api.PATH_SINGLE_PRICE
 import uk.co.adambennett.core.data.api.Prices
 import uk.co.adambennett.core.data.models.Currency
 import uk.co.adambennett.core.data.models.PriceDatum
@@ -25,6 +27,6 @@ class PriceService @Inject constructor(retrofit: Retrofit) {
     fun getCryptocurrencyPrice(
             base: Currency,
             quote: String
-    ): Single<PriceDatum> = service.getCurrentPrice(base.symbol, quote)
+    ): Single<PriceDatum> = service.getCurrentPrice(BASE_API + PATH_SINGLE_PRICE, base.symbol, quote)
 
 }

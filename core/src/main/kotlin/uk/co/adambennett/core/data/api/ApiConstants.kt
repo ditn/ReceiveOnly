@@ -16,8 +16,9 @@
 
 package uk.co.adambennett.core.data.api
 
-const val BASE_API: String = "https://blockchain.info"
-
+const val BASE_BLOCK_EXPLORER: String = "https://blockchain.info"
 const val PATH_MULTI_ADDRESS = "/multiaddr"
+
+const val BASE_API: String = "https://api.blockchain.info"
 const val PATH_SINGLE_PRICE = "/price/index"
 

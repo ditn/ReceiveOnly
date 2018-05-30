@@ -83,7 +83,7 @@ class CryptoPriceSliceProvider : SliceProvider() {
             ListBuilder(context, sliceUri, 30 * 60 * 1000)
                     .addRow {
                         it.setTitle("${symbol.toUpperCase()} Price = $$price")
-                        it.addEndItem(IconCompat.createWithResource(context, R.drawable.vector_bitcoin), ListBuilder.SMALL_IMAGE)
+                        it.addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
                     }
                     .build()
         }
