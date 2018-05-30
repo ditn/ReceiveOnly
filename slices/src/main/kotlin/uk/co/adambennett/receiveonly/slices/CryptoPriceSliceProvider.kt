@@ -8,21 +8,22 @@ import androidx.slice.Slice
 import androidx.slice.SliceProvider
 import androidx.slice.builders.ListBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
+import uk.co.adambennett.androidcore.extensions.MemorySafeSubscription
+import uk.co.adambennett.androidcore.extensions.addToCompositeDisposable
 import uk.co.adambennett.core.data.models.Currency
 import uk.co.adambennett.core.data.services.PriceService
 import uk.co.adambennett.receiveonly.slices.di.SlicesInjector
-import java.math.BigDecimal
 import javax.inject.Inject
 
 /**
  * Displays URIs in the format slice-content://uk.co.adambennett.receiveonly/prices/$currency
  */
-class CryptoPriceSliceProvider : SliceProvider() {
+class CryptoPriceSliceProvider : SliceProvider(), MemorySafeSubscription {
 
-    @Inject
-    lateinit var priceService: PriceService
+    override val compositeDisposable = CompositeDisposable()
+    @Inject lateinit var priceService: PriceService
     private var bitcoinPrice: Double? = null
     private var etherPrice: Double? = null
     private var bitcoinCashPrice: Double? = null
@@ -33,9 +34,6 @@ class CryptoPriceSliceProvider : SliceProvider() {
      */
     override fun onCreateSliceProvider(): Boolean {
         SlicesInjector.instance.getSlicesComponent().inject(this)
-
-        Timber.d(priceService.toString())
-
         return true
     }
 
@@ -81,11 +79,11 @@ class CryptoPriceSliceProvider : SliceProvider() {
             val symbol = getCurrencyForUri(sliceUri).symbol
 
             ListBuilder(context, sliceUri, 30 * 60 * 1000)
-                    .addRow {
-                        it.setTitle("${symbol.toUpperCase()} Price = $$price")
-                        it.addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
-                    }
-                    .build()
+                .addRow {
+                    it.setTitle("${symbol.toUpperCase()} Price = $$price")
+                    it.addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
+                }
+                .build()
         }
     }
 
@@ -93,21 +91,22 @@ class CryptoPriceSliceProvider : SliceProvider() {
         val currency = getCurrencyForUri(sliceUri)
 
         priceService.getCryptocurrencyPrice(currency, "usd")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess {
-                    when (currency) {
-                        Currency.Bitcoin -> bitcoinPrice = it.price
-                        Currency.Ether -> etherPrice = it.price
-                        Currency.BitcoinCash -> bitcoinCashPrice = it.price
-                    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .addToCompositeDisposable(this)
+            .doOnSuccess {
+                when (currency) {
+                    Currency.Bitcoin -> bitcoinPrice = it.price
+                    Currency.Ether -> etherPrice = it.price
+                    Currency.BitcoinCash -> bitcoinCashPrice = it.price
+                }
 
-                    context.contentResolver.notifyChange(sliceUri, null)
-                }
-                .doOnError {
-                    // TODO: Render error state
-                }
-                .subscribe()
+                context.contentResolver.notifyChange(sliceUri, null)
+            }
+            .doOnError {
+                // TODO: Render error state
+            }
+            .subscribe()
     }
 
     private fun getCurrencyForUri(sliceUri: Uri): Currency = when {
@@ -118,9 +117,18 @@ class CryptoPriceSliceProvider : SliceProvider() {
     }
 
     private fun getIconForUri(sliceUri: Uri): IconCompat = when {
-        sliceUri.path == "/prices/btc" -> IconCompat.createWithResource(context, R.drawable.vector_bitcoin)
-        sliceUri.path == "/prices/eth" -> IconCompat.createWithResource(context, R.drawable.vector_eth)
-        sliceUri.path == "/prices/bch" -> IconCompat.createWithResource(context, R.drawable.vector_bitcoin_cash)
+        sliceUri.path == "/prices/btc" -> IconCompat.createWithResource(
+            context,
+            R.drawable.vector_bitcoin
+        )
+        sliceUri.path == "/prices/eth" -> IconCompat.createWithResource(
+            context,
+            R.drawable.vector_eth
+        )
+        sliceUri.path == "/prices/bch" -> IconCompat.createWithResource(
+            context,
+            R.drawable.vector_bitcoin_cash
+        )
         else -> throw IllegalArgumentException("Unknown URI $sliceUri")
     }
 
@@ -129,28 +137,27 @@ class CryptoPriceSliceProvider : SliceProvider() {
         // We’re waiting to load the time to work so indicate that on the slice by
         // setting the subtitle with the overloaded method and indicate true.
         return ListBuilder(context, sliceUri, ListBuilder.INFINITY)
-                .addRow {
-                    it.apply {
-                        setTitle("Fetching price")
-                        setSubtitle(null, true)
-                        addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
-                    }
+            .addRow {
+                it.apply {
+                    setTitle("Fetching ${getCurrencyForUri(sliceUri).symbol.toUpperCase()} price")
+                    setSubtitle(null, true)
+                    addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
                 }
-                .build()
+            }
+            .build()
     }
 
     /**
      * Slice has been pinned to external process. Subscribe to data source if necessary.
      */
     override fun onSlicePinned(sliceUri: Uri?) {
-        // When data is received, call context.contentResolver.notifyChange(sliceUri, null) to
-        // trigger CryptoPriceSliceProvider#onBindSlice(Uri) again.
+        sliceUri?.let { loadPriceInformation(it) }
     }
 
     /**
      * Unsubscribe from data source if necessary.
      */
     override fun onSliceUnpinned(sliceUri: Uri?) {
-        // Remove any observers if necessary to avoid memory leaks.
+        compositeDisposable.clear()
     }
 }

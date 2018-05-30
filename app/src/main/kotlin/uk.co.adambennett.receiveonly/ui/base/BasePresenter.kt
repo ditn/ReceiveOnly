@@ -18,10 +18,11 @@ package uk.co.adambennett.receiveonly.ui.base
 
 import androidx.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
+import uk.co.adambennett.androidcore.extensions.MemorySafeSubscription
 
-open class BasePresenter<VIEW : View> : Presenter<VIEW> {
+open class BasePresenter<VIEW : View> : Presenter<VIEW>, MemorySafeSubscription {
 
-    val compositeDisposable = CompositeDisposable()
+    override val compositeDisposable = CompositeDisposable()
 
     override lateinit var view: VIEW
 

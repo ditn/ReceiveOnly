@@ -18,13 +18,13 @@ package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import uk.co.adambennett.androidcore.extensions.addToCompositeDisposable
+import uk.co.adambennett.androidcore.extensions.applySchedulers
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.androidcore.transactions.repository.TransactionsRepository
 import uk.co.adambennett.receiveonly.ui.base.BasePresenter
 import uk.co.adambennett.receiveonly.ui.states.UiState
 import uk.co.adambennett.receiveonly.util.annotations.Unscoped
-import uk.co.adambennett.receiveonly.util.rxjava.addToCompositeDisposable
-import uk.co.adambennett.receiveonly.util.rxjava.applySchedulers
 import javax.inject.Inject
 
 @Unscoped
@@ -76,7 +76,8 @@ class TransactionListPresenterImpl @Inject constructor(
     }
 
     companion object {
-        private const val X_PUB = "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
+        private const val X_PUB =
+                "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
     }
 
 }
