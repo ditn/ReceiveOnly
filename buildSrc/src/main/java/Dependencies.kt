@@ -20,21 +20,20 @@ object Versions {
 
     // Release info
     const val minSdk = 21
-    const val targetSdk = 27
-    const val compileSdk = 27
+    const val targetSdk = 28
+    const val compileSdk = "android-P"
     const val versionCode = 1
     const val versionName = "1.0"
-    const val buildTools = "27.0.3"
+    const val buildTools = "28.0.0-rc2"
 
     // Build tools and languages
-    const val androidGradlePlugin = "3.0.1"
-    const val kotlin = "1.2.30"
+    const val androidGradlePlugin = "3.2.0-alpha14"
+    const val kotlin = "1.2.41"
 
     // Google
-    const val supportVersion = "27.1.0"
-    const val constraintLayout = "1.0.2"
-    const val room = "1.0.0"
-    const val roomPaging = "1.0.0-alpha6"
+    const val androidX = "1.0.0-alpha1"
+    const val constraintLayout = "1.1.0"
+    const val architecture = "2.0.0-alpha1"
     const val playServices = "11.8.0"
     // Arch
     const val dagger = "2.15"
@@ -49,7 +48,7 @@ object Versions {
     const val bitcoinJ = "0.14.4"
     const val qrReader = "2.0.1"
     // Testing
-    const val espresso = "2.2.2"
+    const val espresso = "3.1.0-alpha1"
     const val jUnit = "4.12"
     // Logging
     const val timber = "4.6.1"
@@ -61,25 +60,24 @@ object Dependencies {
     // Build tools and languages
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     // Support Libraries
-    const val appcompatV7 = "com.android.support:appcompat-v7:${Versions.supportVersion}"
-    const val design = "com.android.support:design:${Versions.supportVersion}"
-    const val cardview = "com.android.support:cardview-v7:${Versions.supportVersion}"
-    const val recyclerviewV7 = "com.android.support:recyclerview-v7:${Versions.supportVersion}"
+    const val appcompat = "androidx.appcompat:appcompat:${Versions.androidX}"
+    const val design = "com.google.android.material:material:${Versions.androidX}"
+    const val cardview = "androidx.cardview:cardview:${Versions.androidX}"
+    const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.androidX}"
     // Constraint Layout
-    const val constraintLayout =
-        "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     // Room
-    const val roomRuntime = "android.arch.persistence.room:runtime:${Versions.room}"
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.architecture}"
     // Room annotation processor
-    const val roomCompiler = "android.arch.persistence.room:compiler:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.architecture}"
     // Room Rx Bindings
-    const val roomRxJava = "android.arch.persistence.room:rxjava2:${Versions.room}"
+    const val roomRxJava = "androidx.room:room-rxjava2:${Versions.architecture}"
     // Paging
-    const val roomPaging = "android.arch.paging:runtime:${Versions.roomPaging}"
+    const val roomPaging = "androidx.paging:paging-runtime:${Versions.architecture}"
     // Test helpers for Room
-    const val roomTesting = "android.arch.persistence.room:testing:${Versions.room}"
+    const val roomTesting = "androidx.room:room-testing:${Versions.architecture}"
     // Play Services
     const val playServices = "com.google.android.gms:play-services-vision:${Versions.playServices}"
     // RxJava
@@ -103,7 +101,7 @@ object Dependencies {
     // QR Reader
     const val qrReader = "com.github.nisrulz:qreader:${Versions.qrReader}"
     // Espresso
-    const val espressoCore = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
+    const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     // JUnit
     const val jUnit = "junit:junit:${Versions.jUnit}"
     // Logging

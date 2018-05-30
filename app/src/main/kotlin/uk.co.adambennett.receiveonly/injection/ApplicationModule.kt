@@ -19,11 +19,14 @@ package uk.co.adambennett.receiveonly.injection
 import `in`.co.ophio.secure.core.KeyStoreKeyGenerator
 import `in`.co.ophio.secure.core.ObscuredPreferencesBuilder
 import android.app.Application
+import androidx.room.Room
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
+import uk.co.adambennett.androidcore.transactions.db.TransactionDao
+import uk.co.adambennett.androidcore.transactions.db.TransactionsDb
 import uk.co.adambennett.receiveonly.util.annotations.ForApplication
 import javax.inject.Named
 import javax.inject.Singleton
@@ -38,16 +41,25 @@ class ApplicationModule(private val application: Application) {
     @Provides
     @Singleton
     @ForApplication
-    fun provideApplicationContext(): Context {
-        return application
-    }
+    fun provideApplicationContext(): Context = application
+
+    @Provides
+    @Singleton
+    fun provideTransactionsDb(): TransactionsDb = Room.databaseBuilder(
+        application,
+        TransactionsDb::class.java, "transactions-db"
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideTransactionDao(transactionsDb: TransactionsDb): TransactionDao =
+        transactionsDb.transactionDao()
 
     @Provides
     @Singleton
     @Named("default")
-    fun provideSharedPrefs(): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(application)
-    }
+    fun provideSharedPrefs(): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     @Singleton

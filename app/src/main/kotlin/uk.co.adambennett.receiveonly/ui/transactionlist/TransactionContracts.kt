@@ -16,7 +16,7 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
-import uk.co.adambennett.core.data.models.Tx
+import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.ui.base.Presenter
 import uk.co.adambennett.receiveonly.ui.base.View
 import uk.co.adambennett.receiveonly.ui.states.UiState
@@ -25,7 +25,7 @@ interface TransactionListView : View {
 
     fun updateUiState(uiState: UiState)
 
-    fun onTransactionsLoaded(transactions: List<Tx>)
+    fun onTransactionsLoaded(transactions: List<Transaction>)
 
     fun onBalanceLoaded(balance: String)
 

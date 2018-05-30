@@ -16,7 +16,7 @@
 
 package uk.co.adambennett.receiveonly.ui.base
 
-import android.support.annotation.CallSuper
+import androidx.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
 
 open class BasePresenter<VIEW : View> : Presenter<VIEW> {

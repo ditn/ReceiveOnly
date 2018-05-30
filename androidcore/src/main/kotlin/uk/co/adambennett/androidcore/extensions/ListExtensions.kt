@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
-package uk.co.adambennett.androidcore
+package uk.co.adambennett.androidcore.extensions
 
-class Placeholder
+fun <T, R> List<T>.unroll(mapper: (T) -> R) : List<R> {
+    val listToReturn = mutableListOf<R>()
+    this.forEach { mapTo(listToReturn, mapper) }
+    return listToReturn.toList()
+}

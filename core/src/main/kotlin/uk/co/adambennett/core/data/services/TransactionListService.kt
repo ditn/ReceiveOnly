@@ -16,17 +16,16 @@
 
 package uk.co.adambennett.core.data.services
 
-import uk.co.adambennett.core.data.api.MultiAddress
-import uk.co.adambennett.core.data.models.MultiAddressResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
+import uk.co.adambennett.core.data.api.MultiAddress
+import uk.co.adambennett.core.data.models.MultiAddressResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class TransactionListService @Inject constructor(retrofit: Retrofit) {
 
-    // TODO: Inject a fully-formed service? Not sure if necessary
     private val service: MultiAddress = retrofit.create(MultiAddress::class.java)
 
     /**
@@ -34,5 +33,4 @@ class TransactionListService @Inject constructor(retrofit: Retrofit) {
      */
     fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
         service.getTransactions(xPub)
-
 }

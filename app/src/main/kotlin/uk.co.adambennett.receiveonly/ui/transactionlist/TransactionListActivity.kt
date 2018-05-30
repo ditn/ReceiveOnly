@@ -17,13 +17,13 @@
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import uk.co.adambennett.core.data.models.Tx
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_transaction_list.*
 import timber.log.Timber
+import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
 import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
@@ -73,7 +73,7 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
         setUiState(uiState)
     }
 
-    override fun onTransactionsLoaded(transactions: List<Tx>) {
+    override fun onTransactionsLoaded(transactions: List<Transaction>) {
         (recyclerview.adapter as TransactionListAdapter).updateTransactions(transactions)
     }
 
