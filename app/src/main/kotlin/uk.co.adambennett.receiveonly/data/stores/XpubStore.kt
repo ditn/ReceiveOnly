@@ -33,7 +33,5 @@ class XpubStore @Inject constructor(private val securePrefs: SharedPreferences) 
     companion object {
 
         private const val KEY_X_PUB = "uk.uk.co.adambennett.key_x_pub"
-
     }
-
 }

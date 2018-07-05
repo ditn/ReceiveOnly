@@ -68,7 +68,6 @@ class TransactionListPresenterImpl @Inject constructor(
 //                        BtcFixedFormat.getCodeInstance().format(response.wallet.finalBalance)
 //
 //                    view.onBalanceLoaded(formattedTotal)
-
                 }, { _ ->
                     view.updateUiState(UiState.FAILED)
                 }
@@ -79,5 +78,4 @@ class TransactionListPresenterImpl @Inject constructor(
         private const val X_PUB =
                 "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
     }
-
 }

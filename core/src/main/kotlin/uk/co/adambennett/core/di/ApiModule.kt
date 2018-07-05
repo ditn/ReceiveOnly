@@ -47,5 +47,4 @@ class ApiModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
-
 }

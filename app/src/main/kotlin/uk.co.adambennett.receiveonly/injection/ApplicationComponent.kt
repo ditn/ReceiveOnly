@@ -26,5 +26,4 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(transactionListActivity: TransactionListActivity)
-
 }

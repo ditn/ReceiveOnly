@@ -108,5 +108,4 @@ class TransactionListActivity : BaseActivity<TransactionListView, TransactionLis
     override fun createPresenter() = transactionListPresenter
 
     override val view: TransactionListView = this
-
 }

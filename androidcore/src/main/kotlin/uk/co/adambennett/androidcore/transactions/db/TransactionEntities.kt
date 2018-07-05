@@ -45,5 +45,4 @@ data class Transaction(
             tx.blockHeight
         )
     }
-
 }

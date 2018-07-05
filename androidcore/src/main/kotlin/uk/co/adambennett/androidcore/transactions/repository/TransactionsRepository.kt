@@ -26,7 +26,6 @@ import uk.co.adambennett.core.data.services.TransactionListService
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 class TransactionsRepository @Inject constructor(
     private val transactionsDao: TransactionDao,

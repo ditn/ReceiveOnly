@@ -21,15 +21,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-//import org.bitcoinj.utils.BtcFormat
+// import org.bitcoinj.utils.BtcFormat
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionListAdapter(
-        private var items: List<Transaction>,
-        private val listener: (Transaction) -> Unit
+    private var items: List<Transaction>,
+    private val listener: (Transaction) -> Unit
 ) : RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
@@ -51,8 +51,8 @@ class TransactionListAdapter(
     }
 
     class TransactionViewHolder(
-            itemView: View,
-            private val listener: (Transaction) -> Unit
+        itemView: View,
+        private val listener: (Transaction) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
         val direction: TextView = itemView.findViewById(R.id.direction) as TextView
@@ -76,6 +76,5 @@ class TransactionListAdapter(
                 else -> direction.text = "Received"
             }
         }
-
     }
 }

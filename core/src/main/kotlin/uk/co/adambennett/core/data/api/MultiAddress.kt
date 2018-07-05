@@ -26,9 +26,7 @@ interface MultiAddress {
 
     @GET
     fun getTransactions(
-            @Url url: String,
-            @Query("active") xPub: String
+        @Url url: String,
+        @Query("active") xPub: String
     ): Single<MultiAddressResponse>
-
 }
-

@@ -35,7 +35,5 @@ class ReceiveOnlyApplication : Application() {
         }
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-
     }
-
 }

@@ -43,7 +43,6 @@ data class Wallet(
     @Json(name = "final_balance") val finalBalance: Long
 )
 
-
 data class Address(
     val address: String,
     @Json(name = "n_tx") val n_tx: Int,
@@ -130,4 +129,3 @@ data class Xpub(
     val m: String,
     val path: String
 )
-

@@ -3,8 +3,8 @@
 buildscript {
 
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath Dependencies.androidGradlePlugin
@@ -17,6 +17,7 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
     }
 }

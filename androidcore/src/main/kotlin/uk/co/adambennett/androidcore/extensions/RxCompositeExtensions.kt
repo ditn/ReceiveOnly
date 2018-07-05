@@ -87,5 +87,4 @@ fun <T> Single<T>.addToCompositeDisposable(impl: MemorySafeSubscription): Single
 interface MemorySafeSubscription {
 
     val compositeDisposable: CompositeDisposable
-
 }

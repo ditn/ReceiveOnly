@@ -24,12 +24,10 @@ import androidx.room.Query
 import androidx.room.RoomDatabase
 import io.reactivex.Maybe
 
-
 @Database(entities = [Transaction::class], version = 1)
 abstract class TransactionsDb : RoomDatabase() {
 
     abstract fun transactionDao(): TransactionDao
-
 }
 
 @Dao
@@ -46,5 +44,4 @@ interface TransactionDao {
 
     @Query("SELECT * FROM transactions")
     fun loadAll(): Maybe<List<Transaction>>
-
 }

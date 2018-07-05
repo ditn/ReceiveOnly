@@ -5,5 +5,4 @@ sealed class Currency(val symbol: String) {
     object Bitcoin : Currency("btc")
     object Ether : Currency("eth")
     object BitcoinCash : Currency("btc")
-
 }

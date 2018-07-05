@@ -16,7 +16,7 @@
 
 package uk.co.adambennett.androidcore.extensions
 
-fun <T, R> List<T>.unroll(mapper: (T) -> R) : List<R> {
+fun <T, R> List<T>.unroll(mapper: (T) -> R): List<R> {
     val listToReturn = mutableListOf<R>()
     this.forEach { mapTo(listToReturn, mapper) }
     return listToReturn.toList()

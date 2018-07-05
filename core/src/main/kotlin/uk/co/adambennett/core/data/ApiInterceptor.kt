@@ -23,7 +23,7 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import okio.Buffer
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 class ApiInterceptor : Interceptor {
 
@@ -85,5 +85,4 @@ class ApiInterceptor : Interceptor {
             buffer.close()
         }
     }
-
 }

@@ -10,9 +10,8 @@ interface Prices {
 
     @GET
     fun getCurrentPrice(
-            @Url url: String,
-            @Query("base") base: String,
-            @Query("quote") quote: String
+        @Url url: String,
+        @Query("base") base: String,
+        @Query("quote") quote: String
     ): Single<PriceDatum>
-
 }

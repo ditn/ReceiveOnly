@@ -81,7 +81,7 @@ class CryptoPriceSliceProvider : SliceProvider(), MemorySafeSubscription {
             ListBuilder(context, sliceUri, 30 * 60 * 1000)
                 .addRow {
                     with(it) {
-                        setTitle("${symbol.toUpperCase()} price", true)
+                        setTitle("${symbol.toUpperCase()} price")
                         setSubtitle("$$price")
                         addEndItem(getIconForUri(sliceUri), ListBuilder.SMALL_IMAGE)
                     }

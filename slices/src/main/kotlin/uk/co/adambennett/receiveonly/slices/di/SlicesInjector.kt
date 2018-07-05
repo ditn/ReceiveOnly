@@ -18,5 +18,4 @@ internal class SlicesInjector {
                     .build()
         return slicesComponent!!
     }
-
 }

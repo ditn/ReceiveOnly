@@ -10,5 +10,4 @@ import javax.inject.Singleton
 interface SlicesComponent {
 
     fun inject(target: CryptoPriceSliceProvider)
-
 }

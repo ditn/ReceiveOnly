@@ -21,14 +21,14 @@ object Versions {
     // Release info
     const val minSdk = 21
     const val targetSdk = 28
-    const val compileSdk = "android-P"
+    const val compileSdk = 28
     const val versionCode = 1
     const val versionName = "1.0"
-    const val buildTools = "28.0.0-rc2"
+    const val buildTools = "28.0.0"
 
     // Build tools and languages
-    const val androidGradlePlugin = "3.2.0-alpha16"
-    const val kotlin = "1.2.41"
+    const val androidGradlePlugin = "3.2.0-beta02"
+    const val kotlin = "1.2.50"
 
     // Android X + Google
     // TODO: These will separate at some point
@@ -50,6 +50,7 @@ object Versions {
     const val securePrefs = "0.1.3"
     const val bitcoinJ = "0.14.4"
     const val qrReader = "2.0.1"
+    const val ktlint = "0.24.0"
     // Testing
     const val espresso = "3.1.0-alpha1"
     const val jUnit = "4.12"
@@ -115,5 +116,7 @@ object Dependencies {
     // Logging
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val kLogging = "io.github.microutils:kotlin-logging:${Versions.kLogger}"
+    // ktlint
+    const val ktlint = "com.github.shyiko:ktlint:${Versions.ktlint}"
 
 }

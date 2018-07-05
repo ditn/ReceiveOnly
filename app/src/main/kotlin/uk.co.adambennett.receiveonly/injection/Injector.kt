@@ -51,5 +51,4 @@ open class Injector private constructor() {
     }
 
     fun getAppComponent(): ApplicationComponent = applicationComponent
-
 }

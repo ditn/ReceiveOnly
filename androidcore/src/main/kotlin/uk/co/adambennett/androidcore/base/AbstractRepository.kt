@@ -51,5 +51,4 @@ abstract class AbstractRepository<LocalType, in RemoteType>(
     abstract fun saveCallResult(data: LocalType)
 
     abstract fun mapper(data: RemoteType): LocalType
-
 }
