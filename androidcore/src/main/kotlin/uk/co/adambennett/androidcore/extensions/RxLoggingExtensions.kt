@@ -18,7 +18,11 @@
 
 package uk.co.adambennett.androidcore.extensions
 
-import io.reactivex.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Observable
+import io.reactivex.Single
 import timber.log.Timber
 
 inline fun <reified T> printEvent(tag: String, success: T?, error: Throwable?) =
@@ -38,7 +42,9 @@ inline fun printEvent(tag: String, error: Throwable?) =
 inline fun tag() =
     Thread.currentThread().stackTrace
         .first { it.fileName.endsWith(".kt") }
-        .let { stack -> "${stack.fileName.removeSuffix(".kt")}::${stack.methodName}:${stack.lineNumber}" }
+        .let { stack ->
+            "${stack.fileName.removeSuffix(".kt")}::${stack.methodName}:${stack.lineNumber}"
+        }
 
 inline fun <reified T> Single<T>.log(): Single<T> {
     val tag = tag()

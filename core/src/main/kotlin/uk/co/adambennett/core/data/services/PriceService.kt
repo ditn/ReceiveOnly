@@ -27,5 +27,6 @@ class PriceService @Inject constructor(retrofit: Retrofit) {
     fun getCryptocurrencyPrice(
         base: Currency,
         quote: String
-    ): Single<PriceDatum> = service.getCurrentPrice(BASE_API + PATH_SINGLE_PRICE, base.symbol, quote)
+    ): Single<PriceDatum> =
+        service.getCurrentPrice(BASE_API + PATH_SINGLE_PRICE, base.symbol, quote)
 }

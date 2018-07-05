@@ -28,7 +28,7 @@ object Versions {
 
     // Build tools and languages
     const val androidGradlePlugin = "3.2.0-beta02"
-    const val kotlin = "1.2.50"
+    const val kotlin = "1.2.51"
 
     // Android X + Google
     // TODO: These will separate at some point

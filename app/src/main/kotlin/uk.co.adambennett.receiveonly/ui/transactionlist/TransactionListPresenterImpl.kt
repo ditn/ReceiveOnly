@@ -75,7 +75,9 @@ class TransactionListPresenterImpl @Inject constructor(
     }
 
     companion object {
+
         private const val X_PUB =
-                "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
+            "xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKrhko4egpiMZbpiaQL2jkwSB1icqYh2cfDfVxdx4df189" +
+                "oLKnC5fSwqPfgyP3hooxujYzAu3fDVmz"
     }
 }

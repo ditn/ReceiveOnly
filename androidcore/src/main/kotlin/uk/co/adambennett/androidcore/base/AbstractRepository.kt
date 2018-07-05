@@ -25,7 +25,7 @@ abstract class AbstractRepository<LocalType, in RemoteType>(
     private val local: Maybe<LocalType>
 ) {
 
-    // TODO: Add staleness checks for the data. Maybe save the timestamp in the DB, and then compare.  
+    // TODO: Add staleness checks for the data. Maybe save the timestamp in the DB, then compare.
 
     /**
      * Fetches from the local source first, before trying the remote source. If remote is triggered,

@@ -29,28 +29,28 @@ import io.reactivex.schedulers.Schedulers
  * onNext/onComplete/onError.
  */
 fun <T> Observable<T>.applySchedulers(): Observable<T> =
-        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Applies standard Schedulers to a [Single], ie IO for subscription, Main Thread for
  * onNext/onComplete/onError.
  */
 fun <T> Single<T>.applySchedulers(): Single<T> =
-        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Applies standard Schedulers to a [Maybe], ie IO for subscription, Main Thread for
  * onNext/onComplete/onError.
  */
 fun <T> Maybe<T>.applySchedulers(): Maybe<T> =
-        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Applies standard Schedulers to a [Completable], ie IO for subscription,
  * Main Thread for onNext/onComplete/onError.
  */
 fun Completable.applySchedulers(): Completable =
-        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 /**
  * Adds the subscription to the upstream [Observable] to the [CompositeDisposable]
@@ -61,17 +61,17 @@ fun Completable.applySchedulers(): Completable =
  * @param <T>       The type of the upstream [Observable]
  */
 fun <T> Observable<T>.addToCompositeDisposable(impl: MemorySafeSubscription): Observable<T> =
-        this.doOnSubscribe { impl.compositeDisposable.add(it) }
+    this.doOnSubscribe { impl.compositeDisposable.add(it) }
 
 /**
  * Adds the subscription to the upstream [Completable] to the [CompositeDisposable] supplied by a
- * class implementing [MemorySafeSubscription]. This allows the subscription to be cancelled automatically by
- * the Presenter on Android lifecycle events.
+ * class implementing [MemorySafeSubscription]. This allows the subscription to be cancelled
+ * automatically by the Presenter on Android lifecycle events.
  *
  * @param impl A class implementing [MemorySafeSubscription]
  */
 fun Completable.addToCompositeDisposable(impl: MemorySafeSubscription): Completable =
-        this.doOnSubscribe { impl.compositeDisposable.add(it) }
+    this.doOnSubscribe { impl.compositeDisposable.add(it) }
 
 /**
  * Adds the subscription to the upstream [Single] to the [CompositeDisposable]
@@ -82,7 +82,7 @@ fun Completable.addToCompositeDisposable(impl: MemorySafeSubscription): Completa
  * @param <T>       The type of the upstream [Single]
  */
 fun <T> Single<T>.addToCompositeDisposable(impl: MemorySafeSubscription): Single<T> =
-        this.doOnSubscribe { impl.compositeDisposable.add(it) }
+    this.doOnSubscribe { impl.compositeDisposable.add(it) }
 
 interface MemorySafeSubscription {
 

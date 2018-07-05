@@ -16,16 +16,16 @@
 
 package uk.co.adambennett.receiveonly.ui.transactionlist
 
+// import org.bitcoinj.utils.BtcFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-// import org.bitcoinj.utils.BtcFormat
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 class TransactionListAdapter(
     private var items: List<Transaction>,

@@ -34,5 +34,5 @@ class TransactionListService @Inject constructor(retrofit: Retrofit) {
      * Returns an up-to-date {@link MultiAddressResponse} object
      */
     fun getMultiAddressObject(xPub: String): Single<MultiAddressResponse> =
-            service.getTransactions(BASE_BLOCK_EXPLORER + PATH_MULTI_ADDRESS, xPub)
+        service.getTransactions(BASE_BLOCK_EXPLORER + PATH_MULTI_ADDRESS, xPub)
 }

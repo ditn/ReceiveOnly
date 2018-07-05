@@ -21,25 +21,26 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_transaction_list.*
+import kotlinx.android.synthetic.main.activity_transaction_list.collapsing_layout
+import kotlinx.android.synthetic.main.activity_transaction_list.loading_layout
+import kotlinx.android.synthetic.main.activity_transaction_list.recyclerview
+import kotlinx.android.synthetic.main.activity_transaction_list.swipe_refresh
+import kotlinx.android.synthetic.main.activity_transaction_list.toolbar
 import timber.log.Timber
 import uk.co.adambennett.androidcore.transactions.db.Transaction
 import uk.co.adambennett.receiveonly.R
-import uk.co.adambennett.receiveonly.R.id.collapsing_layout
-import uk.co.adambennett.receiveonly.R.id.loading_layout
-import uk.co.adambennett.receiveonly.R.id.recyclerview
-import uk.co.adambennett.receiveonly.R.id.swipe_refresh
 import uk.co.adambennett.receiveonly.injection.Injector
 import uk.co.adambennett.receiveonly.ui.base.BaseActivity
 import uk.co.adambennett.receiveonly.ui.states.UiState
 import uk.co.adambennett.receiveonly.util.consume
-import java.util.*
+import java.util.Collections
 import javax.inject.Inject
 
 class TransactionListActivity : BaseActivity<TransactionListView, TransactionListPresenter>(),
     TransactionListView {
 
-    @Inject lateinit var transactionListPresenter: TransactionListPresenterImpl
+    @Inject
+    lateinit var transactionListPresenter: TransactionListPresenterImpl
 
     init {
         Injector.instance.getAppComponent().inject(this)

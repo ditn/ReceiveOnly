@@ -1,5 +1,5 @@
 root = true
 
 [*.{kt,kts}]
-# To align with Google's Android standards
-continuation_indent_size=8
+# true (recommended) / false
+insert_final_newline=true
